@@ -4,3 +4,8 @@ body {
     margin-left: 5%;
     margin-right: 5%;
 }
+
+#links {
+    text-align: center;
+    font-size: 30px;
+}
