@@ -8,20 +8,35 @@ body {
 
 h1 {
     text-align: center;
-    color: red;
+    color: black;
+    font-size: 50px;
 }
 
 h2 {
     text-align: center;
     color: black;
+    font-size: 40px;
 }
+
+h3 {
+    font-size: 32px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+h5 {
+    font-size: 20px;
+}
+
 #links {
     text-align: center;
-    font-size: 30px;
+    font-size: 50px;
 }
 
 img {
     display: flex;
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 75%;
     margin: 0 auto;
