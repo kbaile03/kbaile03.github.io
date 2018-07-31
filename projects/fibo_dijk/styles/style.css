@@ -1,0 +1,103 @@
+:root { /* Color theme variables! */
+    /* --c1: #c0d6df;
+    --c2: #dbe9ee;
+    --c3: #726953;
+    --c4: #4a6fa4;
+    --c5: #166088; */
+
+    /* --c1: #c0caad;
+    --c2: #9da9a0;
+    --c3: #654c4f;
+    --c4: #b26e63;
+    --c5: #cec075; */
+
+    /* --c1: #f3f5f2;
+    --c2: #a3b097;
+    --c3: #b98f56;
+    --c4: #b05c4f;
+    --c5: #355759; */
+
+    --c1: #FAFBFB;
+    --c2: #A4BCC6;
+    --c3: #DEC482;
+    --c4: #9A9EA3;
+    --c5: #556970;
+}
+/* page elements (the header and footer) */
+.page {
+  position: fixed;
+  display: block;
+  height: 30px;
+  width: 100%;
+  background-color: var(--c2);
+  margin-left: -8px;
+} #header {
+  top: 0px;
+} #footer {
+  bottom: 0px;
+}
+
+
+/* links */
+a {
+  display: block;
+  font-family: 'Roboto Slab', serif;
+  color: white;
+  padding: 4px;
+}
+a:hover {
+  color: var(--c5);
+}
+
+/* the contents bar */
+#contents {
+  position: fixed;
+  font-family: 'Roboto Slab', serif;
+  font-size: 14px;
+  width: 200px;
+  height: 300px;
+  left: -190px;
+  top: 0;
+  background-color: var(--c3);
+  color: var(--c5);
+  transition: left 1s;
+}
+#contents:hover {
+  left: 0;
+}
+#sections {
+  margin-top: 35px;
+  margin-left: 10px;
+}
+
+/* the document */
+#main {
+  width: 600px;
+  margin: 0 auto;
+  margin-top: 35px;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+}
+
+h1 {
+  font-family: "Roboto Slab", serif;
+  color: var(--c3);
+  text-align: center;
+}
+
+h2 {
+  font-family: "Roboto Slab", serif;
+  color: var(--c4);
+  text-align: center;
+}
+
+/* graphs */
+.graph {
+  display: block;
+  background-color: var(--c1);
+}
+
+.heap {
+  display: block;
+  background-color: var(--c3);
+}
