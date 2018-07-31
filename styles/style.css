@@ -1,43 +1,140 @@
 body {
-    background-color: #ffe490;
-    font-family: 'Do Hyeon', sans-serif;
-    font-size: 18px;
-    margin-left: 5%;
-    margin-right: 5%;
+  background-color: white;
+  font-family: 'Bungee Hairline', cursive;/*'Rokkitt' Arvo, serif;*/
+  font-size: 1em;
+  padding: 20px;
 }
+#title {
+  text-align: center;
+  display: block;
+  font-family: 'Bungee Hairline', cursive;
+  font-weight: bold;
+  color: white;
+  font-size: 4em;
+  margin-top: 10px;
 
-h1 {
-    text-align: center;
-    color: black;
-    font-size: 50px;
 }
-
 h2 {
-    text-align: center;
-    color: black;
-    font-size: 40px;
+  text-align: center;
+  color: white;
+  font-size: 2em;
+  margin: 0;
+  margin-bottom: 10px;
 }
 
-h3 {
-    font-size: 25px;
+.title-header {
+  background-image: url("../pictures/on_mountain.JPG");
+  background-position: 50% 40%;
+  background-size: 100%;
+  width: calc(100% - 56px);
+  height: 100px;
+  position: fixed;
+  display: block;
+  margin: 0;
+  box-shadow: 10px 10px 10px black;
+}
+#rest {
+  margin-top: 110px;
 }
 
-h4 {
-    font-size: 20px;
+.header {
+  display: block;
+  background-color: #222222;
+  margin: 0;
+  box-shadow: 10px 10px 10px black;
 }
 
-h5 {
-    font-size: 18px;
+.card-1 {
+  box-shadow: 0 0px 0px rgba(0,0,0,0.12), 0 0px 0px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
-#links {
-    text-align: center;
-    font-size: 50px;
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+#content {
+  font-family: 'Open Sans', sans-serif;
+  padding: 10px 40px 20px 40px;
+  display: none;
+  opacity:  0;
+  visibility: hidden;
+  transition: visibility 0s, opacity 1s linear;
+}
+#bio .header {
+  background-color: #444444;
+}
+#resume .header {
+  background-color: #555555;
+}
+#projects .header {
+  background-color: #666666;
+
 }
 
+#art .header {
+  background-color: #777777;
+
+}
+
+#art:hover #content {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+
+}
+#bio:hover #content {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+#resume:hover #content {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+#projects:hover #content {
+  visibility: visible;
+  display: block;
+  opacity: 1;
+}
+figure {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  margin: 0;
+}
 img {
-    display: flex;
-    width: 75%;
-    height: 75%;
-    margin: auto;
+  display: block;
+  width: 100%;
+  margin: -18% 0% 0% 0%;
+}
+
+
+.sidebar {
+  color: white;
+  width: 80px; /* Set the width of the sidebar */
+  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
+  z-index: 1; /* Stay on top */
+  top: 20%;
+  left: 0;
+  background-color: #183460;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  padding: 10px;
+}
+.sidenbar a {
+    padding: 100px;
+    font-size: 10px;
+    display: block;
+}
+.sidebar a:hover {
+    color: #f8b195;
+}
+#spotify {
+  width: 100%;
+}
+
+@media only screen and (max-width: 730px) {
+	#title {
+    font-size: 20px;
+  }
 }
