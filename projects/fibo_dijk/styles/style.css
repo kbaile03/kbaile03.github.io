@@ -99,29 +99,38 @@ h4 {
   text-align: center;
 }
 
-.node {
-  background-color: black;
-}
-.link {
-  stroke:
-}
+/* greuler */
 
+svg {
+  border-radius: 16px;
+}
 
 /* graphs */
-.graph {
+
+.graph svg {
   margin-top: 5px;
   margin-bottom: 5px;
-  background-color: var(--c1);
+  border: 10px;
+  background-color: rgb(246,252,240);
 }
-
+.graph marker path{
+  fill: var(--c5);
+}
+.graph .edge path {
+  stroke: var(--c5);
+}
 /* heaps */
 
-.heap {
+.heap svg {
   margin-top: 5px;
   margin-bottom: 5px;
   background-color: var(--c3);
 }
 
-#input_el_fib {
+#fib_insert_key {
   width: 50px;
+}
+
+#greuler-min circle {
+  fill: var(--c3);
 }

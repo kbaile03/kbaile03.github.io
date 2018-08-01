@@ -1,3 +1,15 @@
+// helper functions i wrote
+var instance;
+count = 0;
+
+function double_link(id1, id2) {
+  var edge1 = { source: id1, target: id2, directed: true };
+  var edge2 = { source: id2, target: id1, directed: true };
+  instance.graph.addEdge(edge1);
+  instance.graoh.addEdge(edge2);
+  instance.update();
+}
+
 
 
 
@@ -27,9 +39,13 @@
 // visualization
 //
 
+
+var nodes = [{id: "min"}] // makes min pointer possible
+var links = [];
+
 'use strict';
 
-var instance;
+
 /**
  * Creates a Fibonacci heap.
  *
@@ -42,6 +58,7 @@ var FibonacciHeap = function (customCompare) {
   this.minNode = undefined;
   this.nodeCount = 0;
 
+  count = 0;
   instance = greuler({
     directed: true,
     target: "#fibonacci_ex",
@@ -66,6 +83,7 @@ FibonacciHeap.prototype.clear = function () {
   console.log("in clear");
   this.minNode = undefined;
   this.nodeCount = 0;
+  count = 0;
 };
 
 /**
@@ -166,6 +184,7 @@ FibonacciHeap.prototype.findMinimum = function () {
  */
 FibonacciHeap.prototype.insert = function (key, value) {
   var node = new Node(key, value);
+  count += 1;
   this.minNode = mergeLists(this.minNode, node, this.compare);
   this.nodeCount++;
   return node;
@@ -426,8 +445,10 @@ function getNodeListSize(node) {
  */
 function Node(key, value) {
   console.log("contsucting node with key: "+ key);
-  instance.graph.addNode({id : key});
+  instance.graph.addNode({id : count, label : key, topRightLabel: 0});
   instance.update();
+
+
   this.key = key;
   this.value = value;
   this.prev = this;

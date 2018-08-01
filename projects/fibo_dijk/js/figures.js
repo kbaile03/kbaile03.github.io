@@ -33,8 +33,7 @@ var fibo = greuler({
     nodes : nodes_f,
     links : links_f
   }
-})
-fibo.update()
+}).update()
 
 var dijk = greuler({
   target: '#dijkstra',
@@ -43,5 +42,4 @@ var dijk = greuler({
     nodes : nodes_d,
     links : links_d
   }
-})
-dijk.update()
+}).update()
