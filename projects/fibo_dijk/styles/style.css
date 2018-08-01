@@ -66,8 +66,11 @@ a:hover {
   left: 0;
 }
 #sections {
-  margin-top: 35px;
+  margin-top: 45px;
   margin-left: 10px;
+}
+#sections a {
+  padding: 10px;
 }
 
 /* the document */
