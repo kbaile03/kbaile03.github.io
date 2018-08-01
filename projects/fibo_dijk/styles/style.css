@@ -90,14 +90,35 @@ h2 {
   color: var(--c4);
   text-align: center;
 }
+h4 {
+  font-family: "Roboto Slab", serif;
+  color: var(--c5);
+  text-align: center;
+}
+
+.node {
+  background-color: black;
+}
+.link {
+  stroke:
+}
+
 
 /* graphs */
 .graph {
-  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background-color: var(--c1);
 }
 
+/* heaps */
+
 .heap {
-  display: block;
+  margin-top: 5px;
+  margin-bottom: 5px;
   background-color: var(--c3);
+}
+
+#input_el_fib {
+  width: 50px;
 }

@@ -1,13 +1,6 @@
 dijkstra_ex_reset();
 
 function dijkstra_ex_reset() {
-  var parent = document.getElementById("dijkstra_ex_parent");
-  var child =  document.getElementById("dijkstra_ex");
-  parent.removeChild(child);
-  var new_child = document.createElement("div");
-  new_child.id = "dijkstra_ex";
-  parent.appendChild(new_child);
-
   instance = greuler({
       directed: true,
       target: '#dijkstra_ex',
