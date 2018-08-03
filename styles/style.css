@@ -53,14 +53,15 @@ h2 {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 #content {
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 30px;
   padding: 10px 40px 20px 40px;
-  display: none;
-  opacity:  0;
-  visibility: hidden;
-  transition: visibility 0s, opacity 1s linear;
+  transition: margin-top: 2s, linear;
+  /* visibility: hidden; */
+
 }
 #bio .header {
+  display: block;
   background-color: #444444;
 }
 #resume .header {
@@ -77,24 +78,23 @@ h2 {
 }
 
 #art:hover #content {
+  display: block;
   visibility: visible;
   opacity: 1;
-  display: block;
-
 }
 #bio:hover #content {
+  display: block;
   visibility: visible;
   opacity: 1;
-  display: block;
 }
 #resume:hover #content {
+  display: block;
   visibility: visible;
   opacity: 1;
-  display: block;
 }
 #projects:hover #content {
-  visibility: visible;
   display: block;
+  visibility: visible;
   opacity: 1;
 }
 figure {

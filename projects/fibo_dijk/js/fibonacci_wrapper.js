@@ -1,12 +1,13 @@
 var heap = new FibonacciHeap();
-
+var count = 0;
 
 console.log(heap);
 
 function insert() {
   var x = document.getElementById("fib_insert_key").value;
   if (x != "") {
-    heap.insert(x, x);
+    heap.insert(x, count);
+    count += 1;
   }
 }
 
@@ -20,5 +21,11 @@ function fib_clear() {
   new_child.classList.add("heap");
   new_child.id = "fibonacci_ex";
   parent.appendChild(new_child);
+  count = 0;
   heap = new FibonacciHeap();
+}
+
+function delete_min() {
+  console.log("deleting");
+  console.log(heap.extractMinimum());
 }

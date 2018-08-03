@@ -44,7 +44,7 @@ function dijkstra_ex_step() {
 
   // traverse an edge with a custom animation, when an edge is
   // traversed it's automatically marked as red for you
-  console.log(instance.selector.traverseOutgoingEdges({ id: start_node }));
+  instance.selector.traverseOutgoingEdges({ id: start_node });
 
   // edge traversal methods
   // - selector.traverseIncomingEdges

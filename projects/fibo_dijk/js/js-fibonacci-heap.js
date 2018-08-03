@@ -1,13 +1,38 @@
 // helper functions i wrote
 var instance;
-count = 0;
 
-function double_link(id1, id2) {
-  var edge1 = { source: id1, target: id2, directed: true };
-  var edge2 = { source: id2, target: id1, directed: true };
+
+function double_link(node1, node2) {
+  console.log("double linking")
+  var edge1 = { source: node1.value, target: node2.value, directed: false };
+  var edge2 = { source: node2.value, target: node1.value, directed: false };
   instance.graph.addEdge(edge1);
   instance.graoh.addEdge(edge2);
   instance.update();
+}
+
+function remove_links_between(node1, node2) {
+  console.log("remove links betwen");
+  var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
+  removeEdges(edges);
+  instance.update;
+}
+
+function point_min(node) {
+  console.log("pointing min");
+  var mins = instance.graph.getOutgoingEdges({id : "min"});
+  console.log(mins);
+  instance.graph.removeEdges(mins)
+  var edge = { source: "min", target: node.value, directed: true };
+  instance.graph.addEdge(edge);
+  instance.update();
+}
+
+function update_key(node, new_key) {
+  console.log("updating key");
+  var update = instance.graph.getNode({ id: node.value });
+  update.label = new_key;
+  intance.update();
 }
 
 
@@ -58,9 +83,8 @@ var FibonacciHeap = function (customCompare) {
   this.minNode = undefined;
   this.nodeCount = 0;
 
-  count = 0;
   instance = greuler({
-    directed: true,
+    directed: false,
     target: "#fibonacci_ex",
     width: 600,
     data: {
@@ -83,7 +107,6 @@ FibonacciHeap.prototype.clear = function () {
   console.log("in clear");
   this.minNode = undefined;
   this.nodeCount = 0;
-  count = 0;
 };
 
 /**
@@ -101,12 +124,15 @@ FibonacciHeap.prototype.decreaseKey = function (node, newKey) {
   }
 
   node.key = newKey;
+  update_key(node, newKey);
   var parent = node.parent;
   if (parent && this.compare(node, parent) < 0) {
+    // havent done anything here yet
     cut(node, parent, this.minNode, this.compare);
     cascadingCut(parent, this.minNode, this.compare);
   }
   if (this.compare(node, this.minNode) < 0) {
+    point_min(node)
     this.minNode = node;
   }
 };
@@ -183,9 +209,11 @@ FibonacciHeap.prototype.findMinimum = function () {
  * @return {Node} node The inserted node.
  */
 FibonacciHeap.prototype.insert = function (key, value) {
+  console.log("in insert")
   var node = new Node(key, value);
-  count += 1;
-  this.minNode = mergeLists(this.minNode, node, this.compare);
+  var new_min = mergeLists(this.minNode, node, this.compare);
+  this.minNode = new_min;
+  point_min(new_min);
   this.nodeCount++;
   return node;
 };
@@ -213,7 +241,9 @@ FibonacciHeap.prototype.size = function () {
  * @param {FibonacciHeap} other The other heap.
  */
 FibonacciHeap.prototype.union = function (other) {
-  this.minNode = mergeLists(this.minNode, other.minNode, this.compare);
+  var new_min = mergeLists(this.minNode, other.minNode, this.compare);
+  this.minNode = new_min;
+  point_min(new_min)
   this.nodeCount += other.nodeCount;
 };
 
@@ -444,10 +474,9 @@ function getNodeListSize(node) {
  * @private
  */
 function Node(key, value) {
-  console.log("contsucting node with key: "+ key);
-  instance.graph.addNode({id : count, label : key, topRightLabel: 0});
+  console.log("contsucting node with key: " + key);
+  instance.graph.addNode({id : value, label : key, topRightLabel: 0});
   instance.update();
-
 
   this.key = key;
   this.value = value;

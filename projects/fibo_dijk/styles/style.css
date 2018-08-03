@@ -113,12 +113,12 @@ svg {
   border: 10px;
   background-color: rgb(246,252,240);
 }
-.graph marker path{
+/* .graph marker path{
   fill: var(--c5);
 }
 .graph .edge path {
   stroke: var(--c5);
-}
+} */
 /* heaps */
 
 .heap svg {
