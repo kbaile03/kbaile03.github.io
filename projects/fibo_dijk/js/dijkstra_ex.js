@@ -30,7 +30,7 @@ function dijkstra_ex_reset() {
       height: 500,
       width: 600,
       animationTime: 800,
-      data: greuler.Graph.random({order : 20, size : 30, connected: true })
+      data: greuler.Graph.random({order : 14, size : 21, connected: true })
   }).update();
     instance.options.data.links.forEach(function (e) {
       e.weight = Math.floor((Math.random() * 10) + 1);
@@ -40,11 +40,11 @@ function dijkstra_ex_reset() {
       n.label="∞";
       n.topRightLabel = 0;
     })
-    instance.options.data.nodes[0].fill = "black";
-    instance.options.data.nodes[19].fill = "red";
-    instance.options.data.nodes[19].label = 0;
+    instance.options.data.nodes[0].fill = "blue";
+    instance.options.data.nodes[13].fill = "red";
+    instance.options.data.nodes[13].label = 0;
     console.log(instance);
-    start = instance.graph.getNode({id: 19});
+    start = instance.graph.getNode({id: 13});
     successors = [start]
 };
 
