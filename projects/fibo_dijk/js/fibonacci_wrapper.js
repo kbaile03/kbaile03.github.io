@@ -28,5 +28,5 @@ function fib_clear() {
 
 function delete_min() {
   console.log("deleting");
-  console.log(heap.extractMinimum());
+  heap.extractMinimum();
 }

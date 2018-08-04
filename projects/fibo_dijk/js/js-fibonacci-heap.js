@@ -1,4 +1,4 @@
-// helper functions I wrote
+// helper functions I wrote to interface with Greuler / Cola more easily
 var instance;
 
 // data structure for keeping track of parents / children
@@ -10,6 +10,22 @@ function add_node(this_node, parent_node, child_node, next_node, prev_node) {
   node_rels[this_node.value][1] = child_node;
   node_rels[this_node.value][2] = next_node;
   node_rels[this_node.value][3] = prev_node;
+}
+
+function delete_node(node) {
+  console.log("deleting node: " + node.key)
+  node_rels[node.value][0] = undefined;
+  node_rels[node.value][1] = undefined;
+  node_rels[node.value][2] = undefined;
+  node_rels[node.value][3] = undefined;
+  instance.graph.removeNode({ id: node.value });
+  instance.update();
+}
+
+function set_degree(node, new_degree) {
+  var update = instance.graph.getNode({ id: node.value });
+  update.topRightLabel = new_degree;
+  instance.update();
 }
 
 function add_rel(node1, rel, node2) {
@@ -70,39 +86,45 @@ function rem_rel(node1, rel) {
 }
 
 function remove_links_between(node1, node2) {
-  console.log("remove links betwen");
   var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
   instance.graph.removeEdges(edges);
   instance.update();
 }
-
-function double_link(node1, node2) {
-  console.log("double linking")
-  var edge1 = { source: node1.value, target: node2.value, directed: false };
-  var edge2 = { source: node2.value, target: node1.value, directed: false };
-  instance.graph.addEdge(edge1);
-  instance.graoh.addEdge(edge2);
-  instance.update();
-}
+//
+// function double_link(node1, node2) {
+//   console.log("double linking")
+//   var edge1 = { source: node1.value, target: node2.value, directed: false };
+//   var edge2 = { source: node2.value, target: node1.value, directed: false };
+//   instance.graph.addEdge(edge1);
+//   instance.graoh.addEdge(edge2);
+//   instance.update();
+// }
 
 function point_min(node) {
-  console.log("pointing min");
+  console.log("pointing min to: " + node.key);
   var mins = instance.graph.getOutgoingEdges({id : "min"});
   console.log(mins);
   instance.graph.removeEdges(mins)
-  var edge = { source: "min", target: node.value, directed: true };
-  instance.graph.addEdge(edge);
-  instance.update();
+  if (node) {
+    var edge = { source: "min", target: node.value, directed: true };
+    instance.graph.addEdge(edge);
+    instance.update();
+  }
 }
 
 function update_key(node, new_key) {
-  console.log("updating key");
   var update = instance.graph.getNode({ id: node.value });
   update.label = new_key;
   intance.update();
 }
+
 function mark_node(node) {
-  console.log("marking node");
+  var update = instance.graph.getNode({ id : node.vaue });
+  update.fill = marked_color;
+}
+function unmark_node(node) {
+  var update = instance.graph.getNode({ id: node.value});
+  update.fill = default_color;
 }
 
 
@@ -137,7 +159,8 @@ function mark_node(node) {
 
 var nodes = [{id: "min"}] // makes min pointer possible
 var links = [];
-
+var default_color = "#2980B9"
+var marked_color = "red"
 'use strict';
 
 
@@ -239,7 +262,9 @@ FibonacciHeap.prototype.extractMinimum = function () {
     if (extractedMin.child) {
       var child = extractedMin.child;
       do {
+        rem_rel(child, "parent");
         child.parent = undefined;
+        add_rel(extractedMin, "child", child.next);
         child = child.next;
       } while (child !== extractedMin.child);
     }
@@ -249,13 +274,19 @@ FibonacciHeap.prototype.extractMinimum = function () {
       nextInRootList = extractedMin.next;
     }
     // Remove min from root list
+    console.log("remove node from list: " + extractedMin.key)
     removeNodeFromList(extractedMin);
+    // delete_node(extractedMin);
     this.nodeCount--;
 
     // Merge the children of the minimum node with the root list
-    this.minNode = mergeLists(nextInRootList, extractedMin.child, this.compare);
+    var new_min = mergeLists(nextInRootList, extractedMin.child, this.compare);
+    this.minNode = new_min;
+    point_min(new_min);
     if (this.minNode) {
-      this.minNode = consolidate(this.minNode, this.compare);
+      new_min = consolidate(this.minNode, this.compare);
+      this.minNode = new_min;
+      point_min(new_min);
     }
   }
   return extractedMin;
@@ -378,20 +409,22 @@ NodeListIterator.prototype.next = function () {
  * @return {Node} The heap's new minimum node.
  */
 function cut(node, parent, minNode, compare) {
-
-  node.parent = undefined;
   rem_rel(node, "parent");
+  node.parent = undefined;
+
   parent.degree--;
+  set_degree(parent, parent.degree);
   if (node.next === node) {
-    parent.child = undefined;
     rem_rel(parent, "child");
+    parent.child = undefined;
   } else {
-    parent.child = node.next;
     add_rel(parent, "child", node.next);
+    parent.child = node.next;
   }
   removeNodeFromList(node);
   minNode = mergeLists(minNode, node, compare);
   node.isMarked = false;
+  unmark_node(node);
   return minNode;
 }
 
@@ -413,7 +446,7 @@ function cascadingCut(node, minNode, compare) {
       minNode = cascadingCut(parent, minNode, compare);
     } else {
       node.isMarked = true;
-
+      mark_node(node);
     }
   }
   return minNode;
@@ -437,13 +470,16 @@ function consolidate(minNode, compare) {
     // If there exists another node with the same degree, merge them
     while (aux[current.degree]) {
       if (compare(current, aux[current.degree]) > 0) {
+        console.log("switching " + current.key + "to " + aux[current.degree].key)
         var temp = current;
         current = aux[current.degree];
-        aux[current.degree] = temp;
+        aux[current.degree] = temp; // TODO: may or may not need to do something with this
       }
       linkHeaps(aux[current.degree], current, compare);
+      console.log("about to make undefined: " + aux[current.degree].key)
       aux[current.degree] = undefined;
       current.degree++;
+      set_degree(current, current.degree);
     }
 
     aux[current.degree] = current;
@@ -452,8 +488,11 @@ function consolidate(minNode, compare) {
   minNode = undefined;
   for (var i = 0; i < aux.length; i++) {
     if (aux[i]) {
+      console.log("looping");
       // Remove siblings before merging
+      add_rel(aux[i], "next", aux[i]);
       aux[i].next = aux[i];
+      add_rel(aux[i], "prev", aux[i]);
       aux[i].prev = aux[i];
       minNode = mergeLists(minNode, aux[i], compare);
     }
@@ -470,14 +509,14 @@ function consolidate(minNode, compare) {
 function removeNodeFromList(node) {
   var prev = node.prev;
   var next = node.next;
-  prev.next = next;
   add_rel(prev, "next", next);
-  next.prev = prev;
+  prev.next = next;
   add_rel(next, "prev", prev);
-  node.next = node;
+  next.prev = prev;
   add_rel(node, "next", node);
-  node.prev = node;
+  node.next = node;
   add_rel(node, "prev", node);
+  node.prev = node;
 }
 
 /**
@@ -490,9 +529,13 @@ function removeNodeFromList(node) {
  */
 function linkHeaps(max, min, compare) {
   removeNodeFromList(max);
-  min.child = mergeLists(max, min.child, compare);
+  var new_min = mergeLists(max, min.child, compare);
+  add_rel(min, "child", new_min);
+  min.child = new_min;
+  add_rel(max, "parent", min);
   max.parent = min;
   max.isMarked = false;
+  unmark_node(max);
 }
 
 /**
@@ -524,7 +567,6 @@ function mergeLists(a, b, compare) {
   b.next = temp;
   add_rel(b.next, "prev", b)
   b.next.prev = b;
-
   return compare(a, b) < 0 ? a : b;
 }
 
