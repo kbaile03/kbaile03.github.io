@@ -28,31 +28,87 @@ function set_degree(node, new_degree) {
   instance.update();
 }
 
+function remove_horz_constraint(node1, node2) {
+  console.log("deconstraining H at: " + node1.value + " " + node2.value)
+  var index1 = instance.options.data.constraints.indexOf({axis: "x", left: node1.value, right: node2.value, gap: 0})
+  var index2 = instance.options.data.constraints.indexOf({axis: "x", left: node2.value, right: node1.value, gap: 0})
+  instance.options.data.constraints.splice(index1, 1);
+  instance.options.data.constraints.splice(index2, 1);
+  instance.update();
+}
+
+function remove_vert_constraint(node1, node2) {
+  console.log("deconstraining V at: " + node1.value + " " + node2.value)
+  var obj;
+  for(var i = 0; i < instance.options.data.constraints.length; i++) {
+    obj = instance.options.data.constraints[i];
+    console.log(obj)
+    if ((obj.left == node1.value && obj.right == node2.value) || (obj.left == node2.value && obj.right == node1.value)) {
+      instance.options.data.constraints.splice(i, 1)
+      i--;
+    }
+  }
+
+  // console.log("deconstraining V at: " + node1.value + " " + node2.value)
+  // var index1 = instance.options.data.constraints.indexOf({axis: "y", left: node1.value, right: node2.value, gap: 0})
+  // var index2 = instance.options.data.constraints.indexOf({axis: "y", left: node2.value, right: node1.value, gap: 0})
+  // console.log("indices: " + index1 + " " + index2)
+  // console.log(instance.options.data.constraints.splice(index1, 1));
+  // console.log(instance.options.data.constraints.splice(index2, 1));
+  // instance.update();
+}
+
+function constrain_horz(node1, node2) {
+  console.log("constraining H at: " + node1.value + " " + node2.value)
+  instance.options.data.constraints.push({axis: "x", left: node1.value, right: node2.value, gap: 0});
+  instance.options.data.constraints.push({axis: "x", left: node2.value, right: node1.value, gap: 0});
+}
+
+function constrain_vert(node1, node2) {
+  console.log("constraining V at: " + node1.value + " " + node2.value)
+  instance.options.data.constraints.push({axis: "y", left: node1.value, right: node2.value, gap: 0});
+  instance.options.data.constraints.push({axis: "y", left: node2.value, right: node1.value, gap: 0});
+}
+
 function add_rel(node1, rel, node2) {
   if (node1 && node2) {
     if (rel == "parent") {
       if (node_rels[node1.value][0] != undefined) { // if parent exists
-        remove_links_between(node1, node_rels[node1.value][0]) // remove it
+        remove_links_between(node1, node_rels[node1.value][0])
+        remove_vert_constraint(node1);
       }
       node_rels[node1.value][0] = node2;
     }
     else if (rel == "child") {
       if (node_rels[node1.value][1] != undefined) {
         remove_links_between(node1, node_rels[node1.value][1])
+        remove_vert_constraint(node1);
       }
       node_rels[node1.value][1] = node2;
     }
     else if (rel == "next") {
+      console.log("NEXT")
       if (node_rels[node1.value][2] != undefined) {
+        console.log("WE'RE in NEXT")
+        console.log(node1)
+        console.log(node_rels[node1.value][2]);
+        remove_vert_constraint(node1, node_rels[node1.value][2]);
         remove_links_between(node1, node_rels[node1.value][2])
       }
       node_rels[node1.value][2] = node2;
+      constrain_vert(node1, node2);
     }
     else if (rel == "prev") {
+      console.log("PREV")
       if (node_rels[node1.value][3] != undefined) {
+        remove_vert_constraint(node1, node_rels[node1.value][3]);
         remove_links_between(node1, node_rels[node1.value][3])
+
       }
       node_rels[node1.value][3] = node2;
+      constrain_vert(node1, node2);
+      console.log(instance.options.data.constraints);
+
     }
     var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
     if (edges.length == 0) {
@@ -102,11 +158,15 @@ function remove_links_between(node1, node2) {
 
 function point_min(node) {
   console.log("pointing min to: " + node.key);
-  var mins = instance.graph.getOutgoingEdges({id : "min"});
+  console.log(instance.options.data.constraints[0])
+  console.log(instance.options.data.constraints[1])
+  var mins = instance.graph.getOutgoingEdges({id : 0});
   console.log(mins);
   instance.graph.removeEdges(mins)
   if (node) {
-    var edge = { source: "min", target: node.value, directed: true };
+    var edge = { source: 0, target: node.value, directed: true };
+    instance.options.data.constraints.push({axis: "x", left: 0, right: node.value, gap: 0});
+    instance.options.data.constraints.push({axis: "x", left: node.value, right: 0, gap: 0});
     instance.graph.addEdge(edge);
     instance.update();
   }
@@ -157,7 +217,7 @@ function unmark_node(node) {
 //
 
 
-var nodes = [{id: "min"}] // makes min pointer possible
+var nodes = [{id: 0, label : "min"}] // id 0 will always be the min ptr
 var links = [];
 var default_color = "#2980B9"
 var marked_color = "red"
@@ -180,10 +240,12 @@ var FibonacciHeap = function (customCompare) {
     directed: false,
     target: "#fibonacci_ex",
     width: 600,
+    symmetricDiffLinkLengths: 5,
     data: {
-      flowLayout: ['y', 30],
+      // flowLayout: ['y', 30],
       nodes: nodes,
-      links: links
+      links: links,
+      constraints: []
     }
   }).update();// the greuler instance
 

@@ -1,5 +1,5 @@
 var heap = new FibonacciHeap();
-var count = 0;
+var count = 1;
 
 console.log(heap);
 
@@ -22,7 +22,7 @@ function fib_clear() {
   new_child.classList.add("heap");
   new_child.id = "fibonacci_ex";
   parent.appendChild(new_child);
-  count = 0;
+  count = 1;
   heap = new FibonacciHeap();
 }
 
