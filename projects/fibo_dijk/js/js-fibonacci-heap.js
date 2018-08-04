@@ -1,6 +1,80 @@
-// helper functions i wrote
+// helper functions I wrote
 var instance;
 
+// data structure for keeping track of parents / children
+var node_rels = [[]];
+
+function add_node(this_node, parent_node, child_node, next_node, prev_node) {
+  node_rels.push([]);
+  node_rels[this_node.value][0] = parent_node;
+  node_rels[this_node.value][1] = child_node;
+  node_rels[this_node.value][2] = next_node;
+  node_rels[this_node.value][3] = prev_node;
+}
+
+function add_rel(node1, rel, node2) {
+  if (node1 && node2) {
+    if (rel == "parent") {
+      if (node_rels[node1.value][0] != undefined) { // if parent exists
+        remove_links_between(node1, node_rels[node1.value][0]) // remove it
+      }
+      node_rels[node1.value][0] = node2;
+    }
+    else if (rel == "child") {
+      if (node_rels[node1.value][1] != undefined) {
+        remove_links_between(node1, node_rels[node1.value][1])
+      }
+      node_rels[node1.value][1] = node2;
+    }
+    else if (rel == "next") {
+      if (node_rels[node1.value][2] != undefined) {
+        remove_links_between(node1, node_rels[node1.value][2])
+      }
+      node_rels[node1.value][2] = node2;
+    }
+    else if (rel == "prev") {
+      if (node_rels[node1.value][3] != undefined) {
+        remove_links_between(node1, node_rels[node1.value][3])
+      }
+      node_rels[node1.value][3] = node2;
+    }
+    var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
+    if (edges.length == 0) {
+      edge = {source: node1.value, target: node2.value, directed: false};
+      instance.graph.addEdge(edge);
+    }
+  }
+}
+
+function rem_rel(node1, rel) {
+  if (node1 && node2) {
+    var node2;
+    if (rel == "parent") {
+      node2 = node_rels[node1.value][0];
+      node_rels[node1.value][0] = undefined;
+    }
+    else if (rel == "child") {
+      node2 = node_rels[node1.value][1];
+      node_rels[node1.value][1] = undefined;
+    }
+    else if (rel == "next") {
+      node2 = node_rels[node1.value][2];
+      node_rels[node1.value][2] = undefined;
+    }
+    else if (rel == "prev") {
+      node2 = node_rels[node1.value][3];
+      node_rels[node1.value][3] = undefined;
+    }
+    remove_links_between(node1, node2);
+  }
+}
+
+function remove_links_between(node1, node2) {
+  console.log("remove links betwen");
+  var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
+  instance.graph.removeEdges(edges);
+  instance.update();
+}
 
 function double_link(node1, node2) {
   console.log("double linking")
@@ -9,13 +83,6 @@ function double_link(node1, node2) {
   instance.graph.addEdge(edge1);
   instance.graoh.addEdge(edge2);
   instance.update();
-}
-
-function remove_links_between(node1, node2) {
-  console.log("remove links betwen");
-  var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
-  removeEdges(edges);
-  instance.update;
 }
 
 function point_min(node) {
@@ -33,6 +100,9 @@ function update_key(node, new_key) {
   var update = instance.graph.getNode({ id: node.value });
   update.label = new_key;
   intance.update();
+}
+function mark_node(node) {
+  console.log("marking node");
 }
 
 
@@ -152,7 +222,7 @@ FibonacciHeap.prototype.delete = function (node) {
     cascadingCut(parent, this.minNode, this.compare);
   }
   this.minNode = node;
-
+  point_min(node);
   this.extractMinimum();
 };
 
@@ -308,12 +378,16 @@ NodeListIterator.prototype.next = function () {
  * @return {Node} The heap's new minimum node.
  */
 function cut(node, parent, minNode, compare) {
+
   node.parent = undefined;
+  rem_rel(node, "parent");
   parent.degree--;
   if (node.next === node) {
     parent.child = undefined;
+    rem_rel(parent, "child");
   } else {
     parent.child = node.next;
+    add_rel(parent, "child", node.next);
   }
   removeNodeFromList(node);
   minNode = mergeLists(minNode, node, compare);
@@ -339,6 +413,7 @@ function cascadingCut(node, minNode, compare) {
       minNode = cascadingCut(parent, minNode, compare);
     } else {
       node.isMarked = true;
+
     }
   }
   return minNode;
@@ -396,9 +471,13 @@ function removeNodeFromList(node) {
   var prev = node.prev;
   var next = node.next;
   prev.next = next;
+  add_rel(prev, "next", next);
   next.prev = prev;
+  add_rel(next, "prev", prev);
   node.next = node;
+  add_rel(node, "next", node);
   node.prev = node;
+  add_rel(node, "prev", node);
 }
 
 /**
@@ -437,9 +516,13 @@ function mergeLists(a, b, compare) {
   }
 
   var temp = a.next;
+  add_rel(a, "next", b.next);
   a.next = b.next;
+  add_rel(a.next, "prev", a);
   a.next.prev = a;
+  add_rel(b, "next", temp);
   b.next = temp;
+  add_rel(b.next, "prev", b)
   b.next.prev = b;
 
   return compare(a, b) < 0 ? a : b;
@@ -474,7 +557,7 @@ function getNodeListSize(node) {
  * @private
  */
 function Node(key, value) {
-  console.log("contsucting node with key: " + key);
+  console.log("constructing node with key, value: " + key +" "+ value);
   instance.graph.addNode({id : value, label : key, topRightLabel: 0});
   instance.update();
 
@@ -487,4 +570,6 @@ function Node(key, value) {
   this.parent = undefined;
   this.child = undefined;
   this.isMarked = undefined;
+
+  add_node(this, undefined, undefined, undefined, undefined)
 }

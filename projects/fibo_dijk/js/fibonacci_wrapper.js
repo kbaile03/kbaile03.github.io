@@ -6,6 +6,7 @@ console.log(heap);
 function insert() {
   var x = document.getElementById("fib_insert_key").value;
   if (x != "") {
+    console.log("count" + count);
     heap.insert(x, count);
     count += 1;
   }
