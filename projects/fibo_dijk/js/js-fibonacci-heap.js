@@ -6,6 +6,8 @@ var node_rels = [[]];
     node_rels[0] = [undefined, undefined, undefined, undefined]
 
 function add_node(this_node, parent_node, child_node, next_node, prev_node) {
+  console.log("THIS NEW NODE HAS A NICE VALUE");
+  console.log(this_node.value)
   node_rels.push([]);
   node_rels[this_node.value][0] = parent_node;
   node_rels[this_node.value][1] = child_node;
@@ -13,14 +15,25 @@ function add_node(this_node, parent_node, child_node, next_node, prev_node) {
   node_rels[this_node.value][3] = prev_node;
 }
 
+function getIndex(node) {
+  console.log("getting indices:")
+  var obj;
+  for(var i = 0; i < instance.options.data.nodes.length; i++) {
+    obj = instance.options.data.nodes[i];
+    console.log(obj)
+    if (obj.id == node.value) {
+      console.log("matched id returning index: " + i)
+      return i;
+    }
+  }
+}
+
+
 function delete_node(node) {
-  console.log("deleting node: " + node.key)
-  node_rels[node.value][0] = undefined;
-  node_rels[node.value][1] = undefined;
-  node_rels[node.value][2] = undefined;
-  node_rels[node.value][3] = undefined;
+  console.log("deleting node: " + node.key + " " + node.value)
+  //remove_all_constraints(getIndex(node.value))
+  node_rels[node.value] = undefined;
   instance.graph.removeNode({ id: node.value });
-  instance.update();
 }
 
 function set_degree(node, new_degree) {
@@ -39,7 +52,7 @@ function set_degree(node, new_degree) {
 // }
 
 function remove_vert_constraint(node1_id, node2_id) {
-  console.log("deconstraining V at: " + node1_id + " " + node2_id)
+  //console.log("deconstraining V at: " + node1_id + " " + node2_id)
   var obj;
   for(var i = 0; i < instance.options.data.constraints.length; i++) {
     obj = instance.options.data.constraints[i];
@@ -60,13 +73,28 @@ function remove_vert_constraint(node1_id, node2_id) {
   // instance.update();
 }
 
-function remove_constraint(axis, node1_id, node2_id, gap) {
-  console.log("deconstraining H at: " + node1_id + " " + node2_id)
+
+function remove_all_constraints(node1_ind) {
+  //console.log("deconstraining H at: " + node1_id + " " + node2_id)
   var obj;
   for(var i = 0; i < instance.options.data.constraints.length; i++) {
     obj = instance.options.data.constraints[i];
     //console.log(obj)
-    if (obj.axis == axis && obj.left == node1_id && obj.right == node2_id && obj.gap == gap) {
+    if (obj.left == node1_ind || obj.right == node1_ind) {
+      //console.log("HERE")
+      instance.options.data.constraints.splice(i, 1)
+      i--;
+    }
+  }
+}
+
+function remove_constraint(axis, node1_ind, node2_ind, gap) {
+  //console.log("deconstraining H at: " + node1_id + " " + node2_id)
+  var obj;
+  for(var i = 0; i < instance.options.data.constraints.length; i++) {
+    obj = instance.options.data.constraints[i];
+    //console.log(obj)
+    if (obj.axis == axis && obj.left == node1_ind && obj.right == node2_ind && obj.gap == gap) {
       //console.log("HERE")
       instance.options.data.constraints.splice(i, 1)
       i--;
@@ -76,62 +104,72 @@ function remove_constraint(axis, node1_id, node2_id, gap) {
 
 function constrain_horz(node1, node2) {
   if (node1.value != node2.value) {
-    console.log("constraining H at: " + node1.value + " " + node2.value)
-    instance.options.data.constraints.push({axis: "x", left: node1.value, right: node2.value, gap: 0});
-    instance.options.data.constraints.push({axis: "x", left: node2.value, right: node1.value, gap: 0});
+    //console.log("constraining H at: " + node1.value + " " + node2.value)
+    instance.options.data.constraints.push({axis: "x", left: getIndex(node1), right: getIndex(node2), gap: 100});
+    instance.options.data.constraints.push({axis: "x", left: getIndex(node2), right: getIndex(node1), gap: 100});
   }
 }
 
 function constrain_vert(node1, node2) {
   if (node1.value != node2.value) {
-    console.log("constraining V at: " + node1.value + " " + node2.value)
-    instance.options.data.constraints.push({axis: "y", left: node1.value, right: node2.value, gap: 0});
-    instance.options.data.constraints.push({axis: "y", left: node2.value, right: node1.value, gap: 0});
+    //console.log("constraining V at: " + node1.value + " " + node2.value)
+    instance.options.data.constraints.push({axis: "y", left: getIndex(node1), right: getIndex(node2), gap: 0});
+    instance.options.data.constraints.push({axis: "y", left: getIndex(node2), right: getIndex(node1), gap: 0});
   }
+}
+
+function constraint_clean(node1, rel_id) {
+
+  var node1_ind = getIndex(node1)
+  var ind = getIndex(node_rels[node1.value][rel_id].value)
+  remove_all_constraints()
+  // remove_constraint("y", node1_ind, ind, 0);
+  // remove_constraint("y", ind, node1_ind, 0);
+  // remove_constraint("x", node1_ind, ind, 1);
+  // remove_constraint("x", ind, node1_ind, 1);
+
 }
 
 function add_rel(node1, rel, node2) {
   if (node1 && node2) {
     if (rel == "parent") {
-      if (node_rels[node1.value][0] != undefined) { // if parent exists
+      if (node_rels[node1.value][0] != undefined) {
+        //constraint_clean(node1, 0)
         remove_links_between(node1, node_rels[node1.value][0])
-        remove_vert_constraint(node1);
       }
       node_rels[node1.value][0] = node2;
+      //constrain_horz(node1, node2);
     }
     else if (rel == "child") {
       if (node_rels[node1.value][1] != undefined) {
+        console.log("ENTERED CHILD: here are node1 key and value, and node_rels[node1.value][1] key and value: ")
+        console.log(node1.key + " " + node1.value)
+        console.log(node_rels[node1.value][1].key + " " + node_rels[node1.value][1].value)
+        //constraint_clean(node1, 1)
         remove_links_between(node1, node_rels[node1.value][1])
-        remove_vert_constraint(node1);
       }
       node_rels[node1.value][1] = node2;
+      //constrain_horz(node1, node2);
     }
     else if (rel == "next") {
       console.log("NEXT")
       if (node_rels[node1.value][2] != undefined) {
-        //console.log("WE'RE in NEXT")
-        //console.log(node1)
-        //console.log(node_rels[node1.value][2]);
-        remove_constraint("y", node1.value, node_rels[node1.value][2].value, 0);
-        remove_constraint("y", node_rels[node1.value][2].value, node1.value, 0);
-        remove_constraint("x", node1.value, node_rels[node1.value][2].value, 1);
-        remove_constraint("x", node_rels[node1.value][2].value, node1.value, 1);
+        //constraint_clean(node1, 2)
         remove_links_between(node1, node_rels[node1.value][2])
       }
       node_rels[node1.value][2] = node2;
-      constrain_vert(node1, node2);
-      instance.options.data.constraints.push({axis: "x", left: node1.value, right: node2.value, gap: 1});
+      //constrain_vert(node1, node2);
+      //instance.options.data.constraints.push({axis: "x", left: getIndex(node1), right: getIndex(node2), gap: 1});
     }
     else if (rel == "prev") {
       console.log("PREV")
       if (node_rels[node1.value][3] != undefined) {
-        remove_constraint("y", node1.value, node_rels[node1.value][3].value, 0);
-        remove_constraint("y", node_rels[node1.value][2].value, node1.value, 0);
+        //constraint_clean(node1, 3)
         remove_links_between(node1, node_rels[node1.value][3])
 
       }
       node_rels[node1.value][3] = node2;
-      constrain_vert(node1, node2);
+      //constrain_vert(node1, node2);
       //instance.options.data.constraints.push({axis: "x", left: node2.value, right: node1.value, gap: 1});
       //console.log(instance.options.data.constraints);
 
@@ -141,6 +179,9 @@ function add_rel(node1, rel, node2) {
       edge = {source: node1.value, target: node2.value, directed: false};
       instance.graph.addEdge(edge);
     }
+    console.log("HERE ARE THE CONSTRAINTS:")
+    console.log(instance.options.data.constraints)
+    instance.update();
   }
 }
 
@@ -168,39 +209,31 @@ function rem_rel(node1, rel) {
 }
 
 function remove_links_between(node1, node2) {
+  console.log("in remove links")
+  console.log(node1)
+  console.log(node2)
   var edges = instance.graph.getAllEdgesBetween({source: node1.value, target: node2.value});
   instance.graph.removeEdges(edges);
-  instance.update();
 }
 
-//
-// function double_link(node1, node2) {
-//   //console.log("double linking")
-//   var edge1 = { source: node1.value, target: node2.value, directed: false };
-//   var edge2 = { source: node2.value, target: node1.value, directed: false };
-//   instance.graph.addEdge(edge1);
-//   instance.graoh.addEdge(edge2);
-//   instance.update();
-// }
 
 function point_min(node) {
-  //console.log("pointing min to: " + node.key);
-  //console.log(instance.options.data.constraints[0])
-  //console.log(instance.options.data.constraints[1])
   var mins = instance.graph.getOutgoingEdges({id : 0});
-  //console.log("mins:");
-  //console.log(mins);
+  console.log("mins:");
+  console.log(mins);
   if (node_rels[0][1] != undefined) {
-    //console.log(node_rels[0][1]);
-    remove_constraint("x", 0, node_rels[0][1].value, 0);
-    remove_constraint("x", node_rels[0][1].value, 0, 0);
+    //remove_constraint("x", 0, node_rels[0][1].value, 0);
+    //remove_constraint("x", node_rels[0][1].value, 0, 0);
   }
+  console.log(node_rels);
+  console.log(instance.options.data.nodes)
   instance.graph.removeEdges(mins)
   if (node) {
+    console.log("pointing min to: " + node.key + " " + node.value)
     var edge = { source: 0, target: node.value, directed: true };
     node_rels[0][1] = node;
-    instance.options.data.constraints.push({axis: "x", left: 0, right: node.value, gap: 0});
-    instance.options.data.constraints.push({axis: "x", left: node.value, right: 0, gap: 0});
+    //instance.options.data.constraints.push({axis: "x", left: 0, right: getIndex(node), gap: 0});
+    //instance.options.data.constraints.push({axis: "x", left: getIndex(node), right: 0, gap: 0});
     instance.graph.addEdge(edge);
     instance.update();
   }
@@ -273,10 +306,10 @@ var FibonacciHeap = function (customCompare) {
     target: "#fibonacci_ex",
     width: 600,
     data: {
-      // flowLayout: ['y', 30],
+      flowLayout: ['y', 30],
       nodes: nodes,
       links: links,
-      constraints: []
+      //constraints: []
     }
   }).update();// the greuler instance
 
@@ -292,7 +325,11 @@ var FibonacciHeap = function (customCompare) {
 FibonacciHeap.prototype.clear = function () {
   console.log("in clear");
   this.minNode = undefined;
+
+  node_rels = [[]]
+  node_rels[0] = [undefined, undefined, undefined, undefined]
   this.nodeCount = 0;
+
 };
 
 /**
@@ -349,6 +386,7 @@ FibonacciHeap.prototype.delete = function (node) {
  * empty.
  */
 FibonacciHeap.prototype.extractMinimum = function () {
+  console.log("HELLO");
   var extractedMin = this.minNode;
   if (extractedMin) {
     // Set parent to undefined for the minimum's children
@@ -366,10 +404,10 @@ FibonacciHeap.prototype.extractMinimum = function () {
     if (extractedMin.next !== extractedMin) {
       nextInRootList = extractedMin.next;
     }
+    console.log("HELLO1")
     // Remove min from root list
-    console.log("remove node from list: " + extractedMin.key)
+    console.log("remove node from list: " + extractedMin.key + " " + extractedMin.value)
     removeNodeFromList(extractedMin);
-    // delete_node(extractedMin);
     this.nodeCount--;
 
     // Merge the children of the minimum node with the root list
@@ -409,7 +447,6 @@ FibonacciHeap.prototype.insert = function (key, value) {
   this.minNode = new_min;
   point_min(new_min);
   this.nodeCount++;
-
   console.log("THE NODE RELS:")
   console.log(node_rels);
 
@@ -713,4 +750,5 @@ function Node(key, value) {
   this.isMarked = undefined;
 
   add_node(this, undefined, undefined, this, this)
+  instance.update();
 }
