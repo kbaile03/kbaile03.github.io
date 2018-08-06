@@ -4,15 +4,19 @@ var count = 1;
 console.log(heap);
 
 function insert() {
-  var x = document.getElementById("fib_insert_key").value;
-  if (x != "") {
+  var x = parseInt(document.getElementById("fib_insert_key").value);
+  if (x != NaN) {
+    resetAllCons()
     console.log("count" + count);
     heap.insert(x, count);
     count += 1;
+    levelize(0, 0)
   }
+
 }
 
 function fib_clear() {
+  //resetAllCons();
   console.log("clearing")
   heap.clear();
   var parent = document.getElementById("fibonacci_ex_parent");
@@ -27,6 +31,8 @@ function fib_clear() {
 }
 
 function delete_min() {
+  resetAllCons()
   console.log("deleting");
   delete_node(heap.extractMinimum());
+  levelize(0, 0)
 }
