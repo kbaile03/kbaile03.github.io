@@ -9,6 +9,8 @@ var offset_space = 50;
 function levelize(nodeId, offset) {
   console.log("nodeId: ")
   console.log(nodeId)
+  console.log("current status of node rels:")
+  console.log(node_rels)
 
   if (node_rels[nodeId][4] == false) {
     console.log("hello sister")
@@ -18,7 +20,6 @@ function levelize(nodeId, offset) {
     }
     if (node_rels[nodeId][3] != undefined) {
         console.log("1")
-        gapify(nodeId, node_rels[nodeId][2].value)
         levelize(node_rels[nodeId][3].value, offset)
     }
     if (node_rels[nodeId][1] != undefined) {
@@ -27,19 +28,21 @@ function levelize(nodeId, offset) {
     }
     if (node_rels[nodeId][2] != undefined) {
       console.log("3")
-
+        gapify(nodeId, node_rels[nodeId][2].value)
         levelize(node_rels[nodeId][2].value, offset)
     }
   } else {
     console.log("nodeid was visited already: " + nodeId)
   }
+  console.log("CONSTRAINTS")
+  console.log(instance.options.data.constraints)
   instance.update();
 }
 
 function gapify(leftNodeId, rightNodeId) {
   var edges = instance.graph.getAllEdgesBetween({source: leftNodeId, target: rightNodeId});
   if (edges.length > 0) {
-    pushLeft(leftNodeId, rightNodeId)
+    pushLeft(rightNodeId, leftNodeId)
   }
 }
 
@@ -96,8 +99,9 @@ function resetAllCons() {
 }
 
 function resetVisited () {
-  console.log(node_rels)
+  console.log("resetVisited")
   for (var i = 0; i < node_rels.length; i++) {
+    console.log("resetting" + i)
     node_rels[i][4] = false
   }
 }
@@ -145,8 +149,7 @@ function add_node(this_node, parent_node, child_node, next_node, prev_node) {
 
 function delete_node(node) {
   console.log("deleting node: " + node.key + " " + node.value)
-  //remove_all_constraints(getIndex(node.value))
-  node_rels[node.value] = [undefined, undefined, undefined, undefined, undefined;
+  node_rels[node.value] = [undefined, undefined, undefined, undefined, undefined];
   instance.graph.removeNode({ id: node.value });
 }
 
@@ -155,7 +158,6 @@ function set_degree(node, new_degree) {
   update.topRightLabel = new_degree;
   instance.update();
 }
-
 
 function add_rel(node1, rel, node2) {
   if (node1 && node2) {
@@ -206,8 +208,8 @@ function add_rel(node1, rel, node2) {
       edge = {source: node1.value, target: node2.value, directed: false};
       instance.graph.addEdge(edge);
     }
-   //console.log("HERE ARE THE CONSTRAINTS:")
-   //console.log(instance.options.data.constraints)
+    console.log("HERE ARE THE CONSTRAINTS:")
+    console.log(instance.options.data.constraints)
     instance.update();
   }
 }
@@ -277,11 +279,11 @@ function point_min(node) {
   }
  //console.log(node_rels);
  //console.log(instance.options.data.nodes)
+  node_rels[0][1] = node;
   instance.graph.removeEdges(mins)
   if (node) {
    //console.log("pointing min to: " + node.key + " " + node.value)
     var edge = { source: 0, target: node.value, directed: true };
-    node_rels[0][1] = node;
     //instance.options.data.constraints.push({axis: "x", left: 0, right: getIndex(node), gap: 0});
     //instance.options.data.constraints.push({axis: "x", left: getIndex(node), right: 0, gap: 0});
     instance.graph.addEdge(edge);
@@ -470,6 +472,8 @@ FibonacciHeap.prototype.extractMinimum = function () {
     // Remove min from root list
     console.log("remove node from list: " + extractedMin.key + " " + extractedMin.value)
     removeNodeFromList(extractedMin);
+    //TODO
+    //delete_node(extractedMin)
     this.nodeCount--;
     console.log("before merge")
     console.log(node_rels)
@@ -477,13 +481,13 @@ FibonacciHeap.prototype.extractMinimum = function () {
     var new_min = mergeLists(nextInRootList, extractedMin.child, this.compare);
     this.minNode = new_min;
     console.log("NEW MIN MERGE")
-    //console.log(new_min.key)
+    console.log(new_min)
     point_min(new_min);
     if (this.minNode) {
 
       new_min = consolidate(this.minNode, this.compare);
       console.log("NEW MIN CONSOLIDATE")
-      console.log(new_min.key)
+      console.log(new_min)
       this.minNode = new_min;
       point_min(new_min);
     }

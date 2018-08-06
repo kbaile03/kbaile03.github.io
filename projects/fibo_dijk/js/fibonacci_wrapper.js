@@ -31,8 +31,8 @@ function fib_clear() {
 }
 
 function delete_min() {
-  resetAllCons()
   console.log("deleting");
   delete_node(heap.extractMinimum());
+  resetAllCons()
   levelize(0, 0)
 }
