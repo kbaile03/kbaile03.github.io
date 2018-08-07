@@ -1,13 +1,10 @@
 var heap = new FibonacciHeap();
 var count = 1;
 
-console.log(heap);
-
 function insert() {
   var x = parseInt(document.getElementById("fib_insert_key").value);
   if (x != NaN) {
     resetAllCons()
-    console.log("count" + count);
     heap.insert(x, count);
     count += 1;
     levelize(0, 0)
@@ -16,8 +13,6 @@ function insert() {
 }
 
 function fib_clear() {
-  //resetAllCons();
-  console.log("clearing")
   heap.clear();
   var parent = document.getElementById("fibonacci_ex_parent");
   var child =  document.getElementById("fibonacci_ex");
@@ -31,7 +26,6 @@ function fib_clear() {
 }
 
 function delete_min() {
-  console.log("deleting");
   delete_node(heap.extractMinimum());
   resetAllCons()
   levelize(0, 0)
