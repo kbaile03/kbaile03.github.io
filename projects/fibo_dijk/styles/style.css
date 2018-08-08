@@ -75,7 +75,7 @@ a:hover {
 
 /* the document */
 #main {
-  width: 600px;
+  width: 800px;
   margin: 0 auto;
   margin-top: 35px;
   font-family: "Open Sans", sans-serif;
@@ -101,12 +101,26 @@ h4 {
 
 /* greuler */
 
+#dijkstra_parent {
+  display: inline-block;
+}
+#fibonacci_parent {
+  display: inline-block;
+}
+
 svg {
   border-radius: 16px;
 }
 
-/* graphs */
+#reset_figures {
+  display: block;
+}
 
+/* graphs */
+.half {
+  display: inline-block;
+  width: 397px;
+}
 .graph svg {
   margin-top: 5px;
   margin-bottom: 5px;

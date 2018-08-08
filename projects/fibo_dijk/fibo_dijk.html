@@ -24,8 +24,8 @@
     <a href="https://kbaile03.github.io/index.html">Back</a>
   </div>
   <div id="main">
-    <script src="js/d3.min.js" type="text/javascript"></script>
-    <script src="js/cola.min.js" type="text/javascript"></script>
+    <script src="js/util/d3.min.js" type="text/javascript"></script>
+    <script src="js/util/cola.min.js" type="text/javascript"></script>
     <script src="bower_components/greuler/dist/greuler.js" type="text/javascript"></script>
 
     <h1>Fibonacci Heaps and Dijkstra's Algorithm - A Visualization</h1>
@@ -75,14 +75,13 @@
        </ul>
     </p>
     <div id="dijkstra_ex_parent">
-      <button id="reset_dijkstra_ex" onclick="dijkstraExReset()">Random Graph</button>
+      <button id="reset_dijkstra_ex" onclick="dReset('dijkstra_ex', 500, 800, false)">Random Graph</button>
       <button id="add_node_dijkstra_ex" onclick="dijkstra_ex"/>Add Node</button>
-      <button id="step_dijkstra_ex" onclick="dijkstraExStep()">Step</button>
-
+      <button id="step_dijkstra_ex" onclick="dStep()">Step</button>
       <div class="graph" id ="dijkstra_ex"></div>
-      <div id="dijk_solution"></div>
-      <script src="js/dijkstra_ex.js" type="text/javascript"></script>
-
+      <div id="dijkstra_ex_solution"></div>
+      <script src="js/dijkstra.js" type="text/javascript"></script>
+      <script src="js/d_controller.js" type="text/javascript"></script>
     </div>
 
     <h2 id="Fibonacci">Fibonacci Heaps</h2>
@@ -90,7 +89,7 @@
       Interactive Fibonacci heap example:
     </p>
     <div id="fibonacci_ex_parent">
-      <button id="fib_clear" onclick="fibClear()">Clear heap</button>
+      <button id="fib_clear" onclick="fibClear()">Initialize heap</button>
       <input id="fib_insert_key" type="number" value step="1" required/>
       <input id"test" type="submit" value="Insert" onclick="insert()"/>
       <button id="fib_delete_min" onclick="deleteMin()">Delete Min</button>
@@ -99,26 +98,22 @@
       <div class="heap" id="fibonacci_ex"></div>
       <script src="js/js-fibonacci-heap.js" type="text/javascript"></script>
       <script src="js/fibonacci_wrapper.js"></script>
-
     </div>
-
-    <!-- <div id="fibonacci_ex_parent">
-      <button id="fib_clear" onclick="fib_clear()">Clear heap</button>
-      <input id="fib_insert_key" type="number" value step="1" required/>
-      <input id"test" type="submit" value="Insert" onclick="insert()"/>
-      <button id="fib_delete_min" onclick="delete_min()">Delete Min</button>
-      <div class="heap" id="fibonacci_ex"></div>
-      <script src="js/fibonacci_new.js"></script>
-
-    </div> -->
 
     <h2 id="Together">Putting Them Together</h2>
     <p>
     </p>
     <div id="figures_parent">
-      <button id="reset_figures" onclick="figures_reset()">Randomize</button>
-      <div class="graph" id="dijkstra"></div>
-      <div class="heap" id="fibonacci"></div>
+      <button id="reset_figures" onclick="figuresReset()">Randomize</button>
+      <div id="dijkstra_parent">
+        <div class="graph half" id="dijkstra"></div>
+        <div id="dijkstra_solution"></div>
+      </div>
+      <div id="fibonacci_parent">
+        <div class="heap half" id="fibonacci"></div>
+      </div>
+      <script src="js/dijkstra.js" type="text/javascript"></script>
+      <script src="js/js-fibonacci-heap.js" type="text/javascript"></script>
       <script src="js/figures.js" type="text/javascript"></script>
     </div>
 

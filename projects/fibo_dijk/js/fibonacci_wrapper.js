@@ -1,5 +1,12 @@
-var heap = new FibonacciHeap()
+greuler({
+  directed: false,
+  target: '#fibonacci_ex',
+  width: 800,
+  height: 500
+}).update()
+
 var count = 1
+var heap
 
 function insert () {
   var x = parseInt(document.getElementById('fib_insert_key').value)
@@ -17,7 +24,9 @@ function insert () {
 }
 
 function fibClear () {
-  heap.clear()
+  if (heap) {
+    heap.clear()
+  }
   var parent = document.getElementById('fibonacci_ex_parent')
   var child = document.getElementById('fibonacci_ex')
   parent.removeChild(child)
@@ -26,7 +35,7 @@ function fibClear () {
   newChild.id = 'fibonacci_ex'
   parent.appendChild(newChild)
   count = 1
-  heap = new FibonacciHeap()
+  heap = new FibonacciHeap('fibonacci_ex', 500, 800)
 }
 
 function deleteMin () {
@@ -37,9 +46,9 @@ function deleteMin () {
 
 function deleteKey () {
   var x = parseInt(document.getElementById('fib_delete_key').value)
-    if (!isNaN(x)) {
-      resetAllCons()
-      deleteNode(heap.deleteTranslate(x))
-      levelize(0, 0)
-    }
+  if (!isNaN(x)) {
+    resetAllCons()
+    deleteNode(heap.deleteTranslate(x))
+    levelize(0, 0)
+  }
 }

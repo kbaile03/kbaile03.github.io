@@ -1,16 +1,16 @@
 var instance
-
 var start
 var successors
+
 instance = greuler({
   directed: true,
   target: '#dijkstra_ex',
   height: 500,
-  width: 600,
+  width: 800,
   animationTime: 800
 }).update()
 
-function dijkstraExReset () {
+function dijkstraReset () {
   var parent = document.getElementById('dijkstra_ex_parent')
   var child =  document.getElementById('dijkstra_ex')
   var solu = document.getElementById('dijk_solution')
@@ -28,7 +28,7 @@ function dijkstraExReset () {
     directed: true,
     target: '#dijkstra_ex',
     height: 500,
-    width: 600,
+    width: 800,
     animationTime: 800,
     data: greuler.Graph.random({order: 14, size: 21, connected: true})
   }).update()
@@ -50,7 +50,7 @@ function dijkstraExReset () {
 
 }
 
-function dijkstraExStep () {
+function dijkstraStep () {
   var here = successors.pop()
   if (here !== undefined) {
     console.log('here')

@@ -263,7 +263,7 @@ function unmarkNode (node) {
 //  visualization
 //
 
-var nodes = [{id: 0, label : 'min'}] //  id 0 will always be the min ptr
+var nodes = [{id: 0, label: 'min', fill: '#654c4f'}] //  id 0 will always be the min ptr
 var links = []
 var defaultColor = '#2980B9'
 var markedColor = 'red'
@@ -273,18 +273,21 @@ var markedColor = 'red'
  * Creates a Fibonacci heap.
  *
  * @constructor
+ * @param {string} div the div name
+ * @param {int} height the svg height
+ * @param {int} width the svg width
  * @param {function} customCompare An optional custom node comparison
  * function.
  */
-var FibonacciHeap = function (customCompare) {
+var FibonacciHeap = function (div, height, width, customCompare) {
   this.minNode = undefined
   this.nodeCount = 0
 
   instance = greuler({
     directed: false,
-    target: '#fibonacci_ex',
-    width: 600,
-    height: 500,
+    target: '#' + div,
+    width: width,
+    height: height,
     data: {
       flowLayout: ['y', -1],
       nodes: nodes,
@@ -353,11 +356,11 @@ FibonacciHeap.prototype.decreaseKey = function (node, newKey) {
 }
 
 
-FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
+FibonacciHeap.prototype.getNodeFromRels = function (nodeId) {
   var i = 0
   var j = 1
-  var found = false
   var obj
+  var found = false
   console.log('id ' + nodeId)
   console.log('length ' + nodeRels.length)
   while (!found && i < nodeRels.length) {
@@ -367,19 +370,23 @@ FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
       console.log(obj)
       if (obj) {
         if (obj.key === nodeId) {
-          console.log('found it')
           found = true
+          return obj
         }
       }
       j++
     }
     i++
     j = 0
-    console.log(i)
   }
-  if (obj) {
-    return this.delete(obj)
-  }
+}
+
+FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
+    return this.delete(this.getNodeFromRels(nodeId))
+}
+
+FibonacciHeap.prototype.decreaseKeyTranslate = function (nodeId, key) {
+  this.decreaseKey(this.getNodeFromRels(nodeId), key)
 }
 
 /**
