@@ -130,6 +130,9 @@ svg {
 #fib_insert_key {
   width: 50px;
 }
+#fib_delete_key {
+  width: 50px;
+}
 
 /* #greuler-min circle {
   fill: var(--c3);
