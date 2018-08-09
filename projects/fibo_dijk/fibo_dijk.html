@@ -6,19 +6,18 @@
     <meta charset="utf-8" />
     <title>Fibonacci Heaps and Dijkstra's Algorithm</title>
     <link rel="stylesheet" href="styles/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Noto+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Noto+Sans|PT+Sans" rel="stylesheet">
   </head>
 <body>
 
   <div id="contents">
     <div id="sections">
       Jump to Section:
-      <br />
-      <br />
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Introduction">Introduction</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Dijkstra">Dijkstra's Algorithm</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Fibonacci">Fibonacci Heaps</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Together">Putting Them Together</a>
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#FurtherReading">Further Reading</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#References">References</a>
     </div>
   </div>
@@ -46,27 +45,38 @@
       problem is most often translated to finding the shortest distance between
       locations for land, water, and air travel, but it can also be used to
       simulate networking and layout problems, and state-based problems, like
-      puzzles. This project demonstrates how the most well-known solution to
-      the Shortest Path Problem can be optimized using a data structure called a
-      Fibonacci Heap.
+      puzzles.
+    </p>
+    <p>
+      The most well-known algorithmic solution to this problem is
+      Dijkstra's Algorithm, which uses a priority queue to keep track of the
+      shortest distance to each vertex on the way to a target vertex. It's in this
+      priority queue where optimizations for this algorithm are made. One way to
+      implement this priority queue is as a Fibonacci Heap. The interactive
+      visualizations here serve to show how Fibonacci Heap operations actually
+      work, both as a standalone heap and when used in Dijkstra's Algorithm as
+      a priority queue.
+
+      </aside>
+
     </p>
 
     <h2 id="Dijkstra">Dijkstra's Algorithm</h2>
     <p>Dijkstra's Algorithm is an algorithm used to find the shortest route
-       between two nodes, called the initial node and the target node,
-       respectively, on a weighted graph. In the example below, the initial
+       between two nodes, called the source node and the target node,
+       respectively, on a weighted graph. In the example below, the source
        node is always marked in red and the target node is always marked in
        blue.
        <h4>Algorithm Overview:</h4>
     <p>
-      Let the distance of node Y be the distance from the initial node to Y. Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.
+      Let the distance of node Y be the distance from the source node to Y. Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.
     </p>
        <ul>
          <li>Mark all nodes unvisited. Create a set of all the unvisited nodes
              called the unvisited set.</li>
          <li>Assign to every node a tentative distance value: set it to zero for
-             our initial node and to infinity for all other nodes. Set the
-             initial node as current.</li>
+             our source node and to infinity for all other nodes. Set the
+             source node as current.</li>
          <li>For the current node, consider all of its unvisited neighbors and
              calculate their tentative distances through the current node.
              Compare the newly calculated tentative distance to the current
@@ -83,7 +93,7 @@
              route between two specific nodes) or if the smallest tentative
              distance among the nodes in the unvisited set is infinity (when
              planning a complete traversal; occurs when there is no connection
-             between the initial node and remaining unvisited nodes), then stop.
+             between the source node and remaining unvisited nodes), then stop.
              The algorithm has finished.</li>
          <li>Otherwise, select the unvisited node that is marked with the
              smallest tentative distance, set it as the new "current node", and
@@ -108,6 +118,41 @@
     </div>
 
     <h2 id="Fibonacci">Fibonacci Heaps</h2>
+    <p>
+      Fibonacci heaps are sometimes referred to as “lazy” data structures
+      because their structure is less strictly managed as they perform
+      operations than in many other data structures. But this “laziness” allows
+      them to have extremely fast amortized time complexities for common heap
+      operations.
+
+      <table>
+        <tr>
+          <th>Operation</th>
+          <th>Amortized Time Complexity</th>
+        </tr>
+        <tr>
+          <th><code>insert()</code></th>
+          <th><code>O(1)</code></th>
+        </tr>
+        <tr>
+          <th><code>findMin()</code></th>
+          <th><code>O(1)</code></th>
+        </tr>
+        <tr>
+          <th><code>deleteMin()</code></th>
+          <th><code>O(log n)</code></th>
+        </tr>
+        <tr>
+          <th><code>decreaseKey()</code></th>
+          <th><code>O(1)</code></th>
+        </tr>
+        <tr>
+          <th><code>merge()</code></th>
+          <th><code>O(1)</code></th>
+        </tr>
+      </table>
+
+    </p>
     <p>
 
     </p>
@@ -159,6 +204,11 @@
     <br />
     <br />
     <div id="references">
+      <h2 id="FurtherReading">Further Reading</h2>
+      <ul>
+          <li><a href="https://www.cosc.canterbury.ac.nz/research/reports/HonsReps/1999/hons_9907.pdf">A Comparison of Data Structures for Dijkstra’s
+Single Source Shortest Path Algorithm</a></li>
+      </ul>
       <h2 id="References">References</h2>
       <h4>Code:</h4>
         <ul>

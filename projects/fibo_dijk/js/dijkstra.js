@@ -62,7 +62,8 @@ Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
     e.weight = Math.floor((Math.random() * 10) + 1)
   })
   this.instance.options.data.nodes.forEach(function (n) {
-    n.fill = 'black'
+    n.fill = '#654c4f'
+    n.r = 12
     n.label = '∞'
     n.topRightLabel = 0
   })

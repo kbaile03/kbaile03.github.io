@@ -306,10 +306,9 @@ var FibonacciHeap = function (div, height, width, customCompare) {
         }
       ]
     }
-  }).update()//  the greuler instance
-
+  })
   instance.layout.linkDistance(10)
-
+  instance.update()//  the greuler instance
 
   if (customCompare) {
     this.compare = customCompare
@@ -382,7 +381,7 @@ FibonacciHeap.prototype.getNodeFromRels = function (nodeId) {
 }
 
 FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
-  //console.log('nodeId to delete ' + nodeId)
+  // console.log('nodeId to delete ' + nodeId)
   return this.delete(this.getNodeFromRels(nodeId))
 }
 
@@ -396,7 +395,7 @@ FibonacciHeap.prototype.decreaseKeyTranslate = function (nodeId, key) {
  * @param {Node} node The node to delete.
  */
 FibonacciHeap.prototype.delete = function (node) {
-console.log('in delete')
+  // console.log('in delete')
   //  This is a special implementation of decreaseKey that sets the argument to
   //  the minimum value. This is necessary to make generic keys work, since there
   //  is no MIN_VALUE constant for generic types.
@@ -434,7 +433,7 @@ FibonacciHeap.prototype.extractMinimum = function () {
     if (extractedMin.next !== extractedMin) {
       nextInRootList = extractedMin.next
     }
-    //console.log('remove node from list: ' + extractedMin.key + ' ' + extractedMin.value)
+    // console.log('remove node from list: ' + extractedMin.key + ' ' + extractedMin.value)
     removeNodeFromList(extractedMin)
     this.nodeCount--
     //  Merge the children of the minimum node with the root list

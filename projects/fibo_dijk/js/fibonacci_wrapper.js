@@ -13,7 +13,7 @@ function insert () {
   try {
     if (!isNaN(x)) {
       resetAllCons()
-      heap.insert(x, count)
+      heap.insert(x, count, '#9da9a0')
       count++
       levelize(0, 0)
     }

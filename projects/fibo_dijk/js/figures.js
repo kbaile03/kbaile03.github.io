@@ -17,9 +17,9 @@ function figuresReset () {
   done = false
   dijkstra.instance.options.data.nodes.forEach( function (n) {
     if (n.label === '∞') {
-      fibInsert('∞', n.id, '#2980B9')
+      fibInsert('∞', n.id, '#9da9a0')
     } else {
-      fibInsert(n.label, n.id, '#2980B9')
+      fibInsert(n.label, n.id, '#9da9a0')
     }
   })
 }
@@ -61,10 +61,11 @@ function figuresStep () {
                 console.log("ELSE WHAT")
               }
 
-            } else {
-              console.log('ELSE WHAT 2')
-
-            }
+             }
+             // else {
+            //   console.log('ELSE WHAT 2')
+            //
+            // }
           }
           var update = dijkstra.instance.graph.getNode({ id: here.id })
           //update.fill = 'white' // TODO: get this to actually chnage color
@@ -80,15 +81,17 @@ function figuresStep () {
             done = true
           } else {
             // console.log('extraction')
-            var min = heap.extractMinimum()
+            var min = heap.minNode
             if (min.key === dijkstra.instance.options.data.nodes[0].label) {
               done = true
             } else {
               resetAllCons()
-              deleteNode(min)
+              deleteNode(heap.extractMinimum())
               levelize(0,0)
-
             }
+
+
+
           }
           dijkstra.instance.update()
         } else {
