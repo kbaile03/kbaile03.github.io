@@ -57,7 +57,7 @@ function suggestLeft(parentNodeId, childNodeId) {
   var edges = instance.graph.getAllEdgesBetween({source: parentNodeId, target: childNodeId})
   if (edges.length > 0 && !alignConstraintExists(parentNodeId, childNodeId)) {
     instance.options.data.constraints.push({axis: 'x', left: getIndex(childNodeId), right: getIndex(parentNodeId), gap: childGapSpace})
-    instance.options.data.constraints.push({axis: 'x', left: getIndex(parentNodeId), right:getIndex(childNodeId), gap: ((childGapSpace+60) * -1)})
+    instance.options.data.constraints.push({axis: 'x', left: getIndex(parentNodeId), right:getIndex(childNodeId), gap: ((childGapSpace+10) * -1)})
   }
 }
 
