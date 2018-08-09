@@ -67,7 +67,9 @@ Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
     n.label = '∞'
     n.topRightLabel = 0
   })
-  this.instance.options.data.nodes[0].fill = 'blue'
+  if (half) {
+    this.instance.options.data.nodes[0].fill = 'blue'
+  }
   this.instance.options.data.nodes[13].fill = 'red'
   this.instance.options.data.nodes[13].label = 0
   this.instance.update()
@@ -123,21 +125,18 @@ Dijkstra.prototype.dijkstraStep = function () {
           //update.fill = 'white' // TODO: get this to actually chnage color
           // console.log('marking ' + here.label)
           update.topRightLabel = 1
-          if (update.fill === 'blue') {
-            console.log("dpn't do it")
-          } else {
+
           this.instance.selector.getNode({id: here.id})
             .attr('fill', '#9cab1f')
-          }
           this.instance.selector.highlightNode({id: here.id})
           this.instance.selector.getEdges()
             .attr('stroke', function (d) { return d.stroke })
           this.instance.selector.traverseOutgoingEdges({id: here.id})
 
-          if (here.fill === 'blue') {
-            // console.log('hello')
-            this.done = true
-          }
+          // if (here.fill === 'blue') {
+          //   // console.log('hello')
+          //   this.done = true
+          // }
           this.instance.update()
         } else {
           // console.log('else what 2.5')
@@ -148,7 +147,7 @@ Dijkstra.prototype.dijkstraStep = function () {
         this.dijkstraStep()
       }
     } else {
-      this.done = true
+      //this.done = true
     }
   } else {
     document.getElementById(this.div + '_solution').innerHTML = 'The best distance is: ' + this.instance.options.data.nodes[0].label

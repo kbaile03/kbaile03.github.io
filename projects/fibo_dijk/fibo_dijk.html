@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -13,12 +12,12 @@
   <div id="contents">
     <div id="sections">
       Jump to Section:
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Introduction">Introduction</a>
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Dijkstra">Dijkstra's Algorithm</a>
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Fibonacci">Fibonacci Heaps</a>
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Together">Putting Them Together</a>
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#FurtherReading">Further Reading</a>
-      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#References">References</a>
+      <br /><br />
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Introduction">Introduction</a><br /><br />
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Dijkstra">Dijkstra's Algorithm</a><br /><br />
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Fibonacci">Fibonacci Heaps</a><br /><br />
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Together">Putting Them Together</a><br /><br />
+      <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#References">References</a><br /><br />
     </div>
   </div>
   <div id="header" class="page">
@@ -38,7 +37,7 @@
 
     <h2 id="Introduction">Introduction</h2>
     <p>
-      The Shortest Path Problem is a simple, common, but practically applicable
+      The Single Source Shortest Path Problem is a simple, common, but practically applicable
       problem in the realm of algorithms with real-world applications and
       consequences. It’s the problem of finding the distance from one vertex in
       a graph to every other vertex in the graph. In the real world, this
@@ -50,64 +49,60 @@
     <p>
       The most well-known algorithmic solution to this problem is
       Dijkstra's Algorithm, which uses a priority queue to keep track of the
-      shortest distance to each vertex on the way to a target vertex. It's in this
-      priority queue where optimizations for this algorithm are made. One way to
-      implement this priority queue is as a Fibonacci Heap. The interactive
-      visualizations here serve to show how Fibonacci Heap operations actually
+      vertices that have been visited and their current distances from the source.
+      It's in this priority queue where optimizations for this algorithm are typically
+      made. One way to implement this priority queue is as a Fibonacci heap. The interactive
+      visualizations here serve to show how Fibonacci heap operations actually
       work, both as a standalone heap and when used in Dijkstra's Algorithm as
       a priority queue.
-
-      </aside>
 
     </p>
 
     <h2 id="Dijkstra">Dijkstra's Algorithm</h2>
-    <p>Dijkstra's Algorithm is an algorithm used to find the shortest route
-       between two nodes, called the source node and the target node,
-       respectively, on a weighted graph. In the example below, the source
-       node is always marked in red and the target node is always marked in
-       blue.
+    <p>Dijkstra's Algorithm is used to find the shortest route from one vertex,
+       called the source, to all others in a weighted graph, but it can be adapted
+       to focus the distance to one node, called a target.
        <h4>Algorithm Overview:</h4>
     <p>
-      Let the distance of node Y be the distance from the source node to Y. Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.
+      Let the distance of vertex Y be the distance from the source vertex to Y.
+      Dijkstra's algorithm will assign some initial distance values and will try
+      to improve them step by step.
     </p>
-       <ul>
-         <li>Mark all nodes unvisited. Create a set of all the unvisited nodes
+       <ol>
+         <li>Mark all vertices unvisited. Create a set of all the unvisited vertices
              called the unvisited set.</li>
-         <li>Assign to every node a tentative distance value: set it to zero for
-             our source node and to infinity for all other nodes. Set the
-             source node as current.</li>
-         <li>For the current node, consider all of its unvisited neighbors and
-             calculate their tentative distances through the current node.
+         <li>Assign to every vertex a tentative distance value: set it to zero for
+             our source vertex and to infinity for all other vertices. Set the
+             source vertex as current.</li>
+         <li>For the current vertex, consider all of its unvisited neighbors and
+             calculate their tentative distances through the current vertex by adding
+             the weight of the edge connecting the current vertex and neighbor to
+             the current vertex's assigned value.
              Compare the newly calculated tentative distance to the current
-             assigned value and assign the smaller one. For example, if the
-             current node A is marked with a distance of 6, and the edge
-             connecting it with a neighbor B has length 2, then the distance to
-             B through A will be 6 + 2 = 8. If B was previously marked with a
-             distance greater than 8 then change it to 8. Otherwise, keep the
-             current value.</li>
+             assigned value and assign the smaller one.</li>
          <li>When we are done considering all of the unvisited neighbors of the
-             current node, mark the current node as visited and remove it from
-             the unvisited set. A visited node will never be checked again.</li>
-         <li>If the destination node has been marked visited (when planning a
-             route between two specific nodes) or if the smallest tentative
-             distance among the nodes in the unvisited set is infinity (when
-             planning a complete traversal; occurs when there is no connection
-             between the source node and remaining unvisited nodes), then stop.
-             The algorithm has finished.</li>
-         <li>Otherwise, select the unvisited node that is marked with the
-             smallest tentative distance, set it as the new "current node", and
+             current vertex, mark the current vertex as visited and remove it from
+             the unvisited set. A visited vertex will never be checked again.</li>
+         <li>Once all reachable vertices are marked, then stop.</li>
+         <li>Otherwise, select the unvisited vertex that is marked with the
+             smallest tentative distance, set it as the new "current vertex", and
              go back to step 3.</li>
-       </ul>
+       </ol>
+    </p>
+
+    <p>
+
     </p>
 
     <h4>How to Use the Tool:</h4>
-    <p>
-      The "Randomize" button generates a semi-random graph with directed
-      and weighted edges. The "Step" button steps through Dijkstra's algorithm
-      until the shortest path is found.
-    </p>
-
+    <div class="tutorial">
+      <p>
+        The "Randomize" button generates a semi-random graph with directed
+        and weighted edges. The "Step" button steps through Dijkstra's algorithm
+        until all shortest paths are found. In the tool, the source vertex is
+        initially marked in red. When a vertex is visited, it is marked in green.
+      </p>
+    </div>
     <div id="dijkstra_ex_parent">
       <button id="reset_dijkstra_ex" onclick="dReset('dijkstra_ex', 500, 800, false)">Randomize</button>
       <button id="step_dijkstra_ex" onclick="dStep()">Step</button>
@@ -143,6 +138,10 @@
           <th><code>O(log n)</code></th>
         </tr>
         <tr>
+          <th><code>delete()</code></th>
+          <th><code>O(1)</code></th>
+        </tr>
+        <tr>
           <th><code>decreaseKey()</code></th>
           <th><code>O(1)</code></th>
         </tr>
@@ -154,17 +153,25 @@
 
     </p>
     <p>
-
+      Fibonacci heaps are implemented using a circular and doubly-linked root list
+      of heap-ordered trees in which each node contains a pointer to its parent
+      and to one of its children. The children of each node are doubly-linked in
+      a circular linked list. There is always a pointer to the node with the minimum key
+      in the heap. It is this high connectivity between nodes that allows <code>O(1)</code>
+      time insertion, minimum-reporting, deletion, key-decreasing, and merging.
+      </thead>
     </p>
 
     <h4>How to Use the Tool:</h4>
-    <p>
-      First, hit the "Initialize Heap" button to set up the heap. From there,
-      enter numerical values in the input box and hit the "Insert" button to
-      insert them into the heap. The "Delete Minimum" button removes the minimum
-      value from the heap and the "Delete Key" button deletes the value in the
-      input box from the heap if it exists.
-    </p>
+    <div class = "tutorial">
+      <p>
+        First, hit the "Initialize Heap" button to set up the Fibonacci heap. From there,
+        enter numerical values in the input box and hit the "Insert" button to
+        insert them into the heap. The "Delete Minimum" button removes the minimum
+        value from the heap and the "Delete Key" button deletes the value in the
+        input box from the heap if it exists.
+      </p>
+    </div>
 
     <div id="fibonacci_ex_parent">
       <button id="fib_clear" onclick="fibClear()">Initialize Heap</button>
@@ -180,9 +187,32 @@
 
     <h2 id="Together">Putting Them Together</h2>
     <p>
+      Dijkstra's original shortest path algorithm does not use a priority queue,
+      and inefficiently runs in <code>O(V<sup>2</sup>)</code> time. When using
+      a Fibonacci heap as a priority queue, it runs in <code>O(E + V log V)</code>
+      time, which is asymptotically the fastest known time complexity for this problem.
+      However, due to their programming complexity, and for some practical purposes,
+      Fibonacci heaps are not always a necessary or significant improvement.
+      Fibonacci heaps are best reserved for applications in which the number of deletions
+      is small compared to the use of other operations. In further iterations of this
+      interactive, the efficacy of different priority queue implementations could
+      be tested with timing tests for graphs of different sizes and properties.
+      For now, animation overhead erases any improvements made by the Fibonacci heap,
+      and this interactive solely shows a visualization of the two structures in action.
     </p>
 
+    <h4>How to Use the Tool:</h4>
+    <div class="tutorial">
+      <p>
+        First, hit the "Randomize" button to generate a semi-random graph and read
+        its data into the Fibonacci heap. From there, hit the step button to step through
+        Dijkstra's Algorithm to find the shortest path from a source node (marked in red)
+        to one specific target node (marked in blue) and watch the changes in the
+        Fibonacci heap reflected in its visualization.
+      </p>
   </div>
+
+ </div>
     <div id="figures_parent">
       <div>
         <button id="reset_figures" onclick="figuresReset()">Randomize</button>
@@ -204,11 +234,6 @@
     <br />
     <br />
     <div id="references">
-      <h2 id="FurtherReading">Further Reading</h2>
-      <ul>
-          <li><a href="https://www.cosc.canterbury.ac.nz/research/reports/HonsReps/1999/hons_9907.pdf">A Comparison of Data Structures for Dijkstra’s
-Single Source Shortest Path Algorithm</a></li>
-      </ul>
       <h2 id="References">References</h2>
       <h4>Code:</h4>
         <ul>
@@ -222,12 +247,20 @@ Single Source Shortest Path Algorithm</a></li>
           Fibonacci Heap Implementation:
           <li><a href="https://github.com/gwtw/js-fibonacci-heap">js-fibonacci-heap</a></li>
         </ul>
+      <h4>Dijkstra's Algorithm</h4>
+        <ul>
+          <li><a href="http://math.mit.edu/~rothvoss/18.304.3PM/Presentations/1-Melissa.pdf">Dijkstra's Algorithm</a></li>
+          <li><a href="http://www-m3.ma.tum.de/foswiki/pub/MN0506/WebHome/dijkstra.pdf">A Note on Two Problems in Connexion with Graphs</a></li>
+          <li><a href="https://www.cosc.canterbury.ac.nz/research/reports/HonsReps/1999/hons_9907.pdf">A Comparison of Data Structures for Dijkstra’s
+Single Source Shortest Path Algorithm</a></li>
+        </ul>
       <h4>Fibonacci Heaps:</h4>
         <ul>
-          <li><a href ="">Item</a></li>
+          <li><a href ="http://bioinfo.ict.ac.cn/~dbu/AlgorithmCourses/Lectures/Fibonacci-Heap-Tarjan.pdf">Fibonacci Heaps and Their Uses in Improved Network Optimization Algorithms </a></li>
+          <li><a href="http://staff.ustc.edu.cn/~csli/graduate/algorithms/book6/chap21.htm">Chapter 21: Fibonacci Heaps</a></li>
         </ul>
-    </div>
 
+    </div>
 
   <div id="footer" class="page"><a href="mailto:kennedy.bailey@tufts.edu?Subject=Fibonacci%20Heaps%20and%20Dijkstra's%20Algorithm" target="_top">Contact Me</a></div>
 

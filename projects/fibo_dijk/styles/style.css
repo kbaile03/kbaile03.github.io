@@ -68,7 +68,6 @@ p {
 
 ul {
   margin: 0 auto;
-  width: 500px;
   padding: 20px;
 }
 
@@ -76,7 +75,6 @@ ul {
 
 /* links */
 a {
-  display: block;
   font-family: 'Roboto Slab', serif;
   color: white;
   padding: 4px;
@@ -94,7 +92,7 @@ li a {
   font-family: 'Roboto Slab', serif;
   font-size: 14px;
   width: 200px;
-  height: 310px;
+  height: 280px;
   left: -190px;
   top: 0;
   background-color: var(--c3);
@@ -144,7 +142,11 @@ h4 {
   font-family: "Roboto Slab", serif;
   color: var(--c5);
   text-align: center;
+  line-height: 0;
+  margin-top: 50px;
 }
+
+
 
 table {
   margin: 0 auto;
@@ -153,12 +155,22 @@ th {
   padding: 10px;
 }
 
+.tutorial {
+  font-size: 14px;
+}
+
 #references {
   width: 600px;
   margin: 0 auto;
-  background-color: rgb(240,235,228);
+  font-family: "Roboto Slab", serif;
+  color: var(--c3);
+  background-color: rgb(250,245,238);
   border-radius: 16px;
   padding: 20px;
+}
+
+#references h4 {
+  margin-top: 0;
 }
 
 /* greuler */
@@ -171,7 +183,7 @@ th {
 }
 
 svg {
-  /* border-radius: 16px; */
+  border-radius: 16px;
 }
 
 #figures_parent {
