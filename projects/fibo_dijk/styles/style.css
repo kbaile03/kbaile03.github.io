@@ -113,7 +113,10 @@ svg {
 }
 
 #reset_figures {
-  display: block;
+  display: inline;
+}
+#step_figures {
+  display: inline;
 }
 
 /* graphs */

@@ -75,8 +75,8 @@ function alignConstraintExists (leftNodeId, rightNodeId) {
 }
 
 function resetAllCons () {
-  console.log(nodeRels)
-  console.log(instance.options.data.constraints)
+  // console.log(nodeRels)
+  // console.log(instance.options.data.constraints)
   try {
     if (instance.options.data.constraints[0]) {
       for (var i = 0; i < instance.options.data.constraints[0].offsets.length; i++) {
@@ -361,13 +361,13 @@ FibonacciHeap.prototype.getNodeFromRels = function (nodeId) {
   var j = 1
   var obj
   var found = false
-  console.log('id ' + nodeId)
-  console.log('length ' + nodeRels.length)
+  // console.log('id ' + nodeId)
+  // console.log('length ' + nodeRels.length)
   while (!found && i < nodeRels.length) {
     while (!found && j < 4) {
-      console.log(i + ' ' + j)
+      // console.log(i + ' ' + j)
       obj = nodeRels[i][j]
-      console.log(obj)
+      // console.log(obj)
       if (obj) {
         if (obj.key === nodeId) {
           found = true
@@ -382,7 +382,8 @@ FibonacciHeap.prototype.getNodeFromRels = function (nodeId) {
 }
 
 FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
-    return this.delete(this.getNodeFromRels(nodeId))
+  console.log('nodeId to delete ' + nodeId)
+  return this.delete(this.getNodeFromRels(nodeId))
 }
 
 FibonacciHeap.prototype.decreaseKeyTranslate = function (nodeId, key) {
@@ -464,10 +465,11 @@ FibonacciHeap.prototype.findMinimum = function () {
  *
  * @param {Object} key The key to insert.
  * @param {Object} value The value to insert.
+ * @param {string} color the node color
  * @return {Node} node The inserted node.
  */
-FibonacciHeap.prototype.insert = function (key, value) {
-  var node = new Node(key, value)
+FibonacciHeap.prototype.insert = function (key, value, color) {
+  var node = new Node(key, value, color)
   var newMin = mergeLists(this.minNode, node, this.compare)
   this.minNode = newMin
   pointMin(newMin)
@@ -751,9 +753,10 @@ function getNodeListSize (node) {
  * @constructor
  * @private
  */
-function Node (key, value) {
-  instance.graph.addNode({id: value, label: key, topRightLabel: 0})
-
+function Node (key, value, color) {
+  instance.graph.addNode({id: value, label: key, topRightLabel: 0, fill: color})
+  console.log("inserted as")
+  console.log(value)
   this.key = key
   this.value = value
   this.prev = this

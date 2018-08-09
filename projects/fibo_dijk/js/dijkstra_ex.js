@@ -12,7 +12,7 @@ instance = greuler({
 
 function dijkstraReset () {
   var parent = document.getElementById('dijkstra_ex_parent')
-  var child =  document.getElementById('dijkstra_ex')
+  var child = document.getElementById('dijkstra_ex')
   var solu = document.getElementById('dijk_solution')
   parent.removeChild(child)
   parent.removeChild(solu)
@@ -78,7 +78,7 @@ function dijkstraStep () {
           instance.selector.traverseOutgoingEdges({id: here.id})
           console.log(here)
           console.log(instance.options.data.nodes)
-          var update = instance.graph.getNode({ id: here.id });
+          var update = instance.graph.getNode({ id: here.id })
           update.fill = 'white' // TODO: get this to actually chnage color
           update.topRightLabel = 1
           instance.update()

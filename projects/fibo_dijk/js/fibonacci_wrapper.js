@@ -38,6 +38,8 @@ function fibClear () {
   heap = new FibonacciHeap('fibonacci_ex', 500, 800)
 }
 
+
+
 function deleteMin () {
   deleteNode(heap.extractMinimum())
   resetAllCons()

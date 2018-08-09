@@ -69,7 +69,7 @@ Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
   this.instance.options.data.nodes[13].fill = 'red'
   this.instance.options.data.nodes[13].label = 0
   this.instance.update()
-  console.log(this.instance)
+  // console.log(this.instance)
   this.start = this.instance.graph.getNode({id: 13})
   this.successors = [this.start]
 

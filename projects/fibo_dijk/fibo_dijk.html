@@ -104,7 +104,11 @@
     <p>
     </p>
     <div id="figures_parent">
-      <button id="reset_figures" onclick="figuresReset()">Randomize</button>
+      <div>
+        <button id="reset_figures" onclick="figuresReset()">Randomize</button>
+        <button id ="step_figures" onclick="figuresStep()">Step</button>
+      </div>
+
       <div id="dijkstra_parent">
         <div class="graph half" id="dijkstra"></div>
         <div id="dijkstra_solution"></div>
