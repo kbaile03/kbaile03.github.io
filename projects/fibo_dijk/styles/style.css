@@ -24,6 +24,27 @@
     --c5: #556970; */
 }
 /* page elements (the header and footer) */
+#icon {
+  margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  width: 200px;
+  padding-top: 0px;
+  -webkit-transition: width 2s, padding-top 2s;
+  transition: width 2s, padding-top 2s;
+  height: auto;
+}
+
+img:hover {
+  padding-top: 50px;
+  width: 100px;
+}
+
 .page {
   position: fixed;
   display: block;
@@ -80,6 +101,7 @@ li a {
   top: 0;
   background-color: var(--c3);
   color: var(--c5);
+  -webkit-transition: left 2s;
   transition: left 1s;
 }
 #contents:hover {
