@@ -19,6 +19,7 @@ function Dijkstra (div, height, width) {
   this.start = undefined
   this.successors = undefined
   this.div = div
+  this.done = false
 }
 
 /**
@@ -32,7 +33,7 @@ function Dijkstra (div, height, width) {
  */
 Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
   var parent = document.getElementById(div + '_parent')
-  var child =  document.getElementById(div)
+  var child = document.getElementById(div)
   var solu = document.getElementById(div + '_solution')
   parent.removeChild(child)
   parent.removeChild(solu)
@@ -48,7 +49,7 @@ Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
   parent.appendChild(new_solu)
 
   // todo
-
+  this.done = false
   this.instance = greuler({
     directed: true,
     target: '#' + div,
@@ -75,47 +76,130 @@ Dijkstra.prototype.dijkstraReset = function (div, height, width, half) {
 
 }
 
-
 /**
  *
  *
  */
 Dijkstra.prototype.dijkstraStep = function () {
-  var here = this.successors.pop()
-  if (here !== undefined) {
-    console.log('here')
-    console.log(here.label)
-    if (here.topRightLabel !== 1) {
-      var temp = this.instance.graph.getSuccessorNodes({id: here.id})
-      for (var i = 0; i < temp.length; i++) {
-        console.log('tempid')
-        console.log(temp[i].label)
-        if (temp[i].topRightLabel !== 1) {
-          this.successors.push(temp[i])
-          var edges = this.instance.graph.getEdgesBetween({source: here.id, target: temp[i].id})
-          if (temp[i].label === '∞') {
-            temp[i].label = edges[0].weight + here.label
-            console.log('label')
-            console.log(temp[i].label)
-          } else if (temp[i].label > edges[0].weight + here.label) {
-            temp[i].label = edges[0].weight + here.label
-            console.log('label2')
-            console.log(temp[i].label)
+  if (!this.done) {
+    this.successors.sort(nodecompareOp)
+    var here = this.successors.pop()
+    if (here !== undefined) {
+      //
+      // console.log('here')
+      // console.log(here.label)
+      if (here.topRightLabel !== 1) {
+
+        var temp = this.instance.graph.getSuccessorNodes({id: here.id})
+
+        temp.sort(nodecompare)
+        if (temp.length !== 0) {
+          for (var i = 0; i < temp.length; i++) {
+            // console.log('tempid')
+            // console.log(temp[i].label)
+            if (temp[i].topRightLabel !== 1) {
+              this.successors.push(temp[i])
+              var edges = this.instance.graph.getEdgesBetween({source: here.id, target: temp[i].id})
+              if (temp[i].label === '∞') {
+                temp[i].label = edges[0].weight + here.label
+                // console.log('label')
+                // console.log(temp[i].label)
+              } else if (temp[i].label > edges[0].weight + here.label) {
+                var oldLabel = temp[i].label
+                temp[i].label = edges[0].weight + here.label
+                // console.log('label2')
+                // console.log(temp[i].label)
+              } else {
+                // console.log("ELSE WHAT")
+              }
+
+            } else {
+              // console.log('ELSE WHAT 2')
+
+            }
           }
+          var update = this.instance.graph.getNode({ id: here.id })
+          //update.fill = 'white' // TODO: get this to actually chnage color
+          // console.log('marking ' + here.label)
+          update.topRightLabel = 1
+          this.instance.selector.highlightNode({id: here.id})
           this.instance.selector.getEdges()
             .attr('stroke', function (d) { return d.stroke })
-          this.instance.selector.highlightNode({id: here.id})
           this.instance.selector.traverseOutgoingEdges({id: here.id})
-          console.log(here)
-          console.log(this.instance.options.data.nodes)
-          var update = this.instance.graph.getNode({ id: here.id });
-          update.fill = 'white'
-          update.topRightLabel = 1
+
+          if (here.fill === 'blue') {
+            // console.log('hello')
+            this.done = true
+          }
           this.instance.update()
+        } else {
+          // console.log('else what 2.5')
+          this.dijkstraStep()
         }
+      } else {
+        // console.log('ELSE WHAT 3')
+        this.dijkstraStep()
       }
+    } else {
+      this.done = true
     }
   } else {
-    document.getElementById(this.div +'_solution').innerHTML = 'The best distance is: ' + this.instance.options.data.nodes[0].label
+    document.getElementById(this.div + '_solution').innerHTML = 'The best distance is: ' + this.instance.options.data.nodes[0].label
   }
 }
+
+
+function nodecompareOp(a, b) {
+  if (a.label < b.label) {
+    //console.log(a.label + '<' + b.label)
+    return 1
+  } else {
+    //console.log(b.label + '<' + a.label)
+    return -1
+  }
+}
+
+//
+// /**
+//  *
+//  *
+//  */
+// Dijkstra.prototype.dijkstraStep = function () {
+//   var here = this.successors.pop()
+//   if (here !== undefined) {
+//     console.log('here')
+//     console.log(here.label)
+//     if (here.topRightLabel !== 1) {
+//       var temp = this.instance.graph.getSuccessorNodes({id: here.id})
+//       for (var i = 0; i < temp.length; i++) {
+//         console.log('tempid')
+//         console.log(temp[i].label)
+//         if (temp[i].topRightLabel !== 1) {
+//           this.successors.push(temp[i])
+//           var edges = this.instance.graph.getEdgesBetween({source: here.id, target: temp[i].id})
+//           if (temp[i].label === '∞') {
+//             temp[i].label = edges[0].weight + here.label
+//             console.log('label')
+//             console.log(temp[i].label)
+//           } else if (temp[i].label > edges[0].weight + here.label) {
+//             temp[i].label = edges[0].weight + here.label
+//             console.log('label2')
+//             console.log(temp[i].label)
+//           }
+//           this.instance.selector.getEdges()
+//             .attr('stroke', function (d) { return d.stroke })
+//           this.instance.selector.highlightNode({id: here.id})
+//           this.instance.selector.traverseOutgoingEdges({id: here.id})
+//           console.log(here)
+//           console.log(this.instance.options.data.nodes)
+//           var update = this.instance.graph.getNode({ id: here.id });
+//           update.fill = 'white'
+//           update.topRightLabel = 1
+//           this.instance.update()
+//         }
+//       }
+//     }
+//   } else {
+//     document.getElementById(this.div +'_solution').innerHTML = 'The best distance is: ' + this.instance.options.data.nodes[0].label
+//   }
+// }

@@ -35,7 +35,24 @@
   top: 0px;
 } #footer {
   bottom: 0px;
+  text-align: center;
 }
+
+p {
+  text-indent: 40px;
+  margin: 0 auto;
+  text-align: justify;
+  text-justify: inter-word;
+  width: 620px;
+  padding: 10px;
+}
+
+ul {
+  margin: 0 auto;
+  width: 500px;
+  padding: 20px;
+}
+
 
 
 /* links */
@@ -47,6 +64,9 @@ a {
 }
 a:hover {
   color: var(--c5);
+}
+li a {
+  color: var(--c2);
 }
 
 /* the contents bar */
@@ -78,7 +98,7 @@ a:hover {
   width: 800px;
   margin: 0 auto;
   margin-top: 35px;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   font-size: 16px;
 }
 
@@ -97,6 +117,14 @@ h4 {
   font-family: "Roboto Slab", serif;
   color: var(--c5);
   text-align: center;
+}
+
+#references {
+  width: 600px;
+  margin: 0 auto;
+  background-color: rgb(250,256,248);
+  border-radius: 16px;
+  padding: 20px;
 }
 
 /* greuler */
@@ -151,6 +179,9 @@ svg {
   width: 50px;
 }
 
+#dijkstra_solution {
+  position:absolute;
+}
 /* #greuler-min circle {
   fill: var(--c3);
 } */

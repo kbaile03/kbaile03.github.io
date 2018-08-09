@@ -19,7 +19,6 @@ function figuresReset () {
     if (n.label === '∞') {
       fibInsert('∞', n.id, '#2980B9')
     } else {
-      console.log('fill' + n.fill)
       fibInsert(n.label, n.id, '#2980B9')
     }
   })
@@ -33,8 +32,8 @@ function figuresStep () {
     var here = dijkstra.successors.pop()
     if (here !== undefined) {
 
-      console.log('here')
-      console.log(here.label)
+      // console.log('here')
+      // console.log(here.label)
       if (here.topRightLabel !== 1) {
 
         var temp = dijkstra.instance.graph.getSuccessorNodes({id: here.id})
@@ -42,21 +41,21 @@ function figuresStep () {
         temp.sort(nodecompare)
         if (temp.length !== 0) {
           for (var i = 0; i < temp.length; i++) {
-            console.log('tempid')
-            console.log(temp[i].label)
+            // console.log('tempid')
+            // console.log(temp[i].label)
             if (temp[i].topRightLabel !== 1) {
               dijkstra.successors.push(temp[i])
               var edges = dijkstra.instance.graph.getEdgesBetween({source: here.id, target: temp[i].id})
               if (temp[i].label === '∞') {
                 temp[i].label = edges[0].weight + here.label
-                console.log('label')
-                console.log(temp[i].label)
+                // console.log('label')
+                // console.log(temp[i].label)
                 fibDecreaseKey('∞', temp[i].label)
               } else if (temp[i].label > edges[0].weight + here.label) {
                 var oldLabel = temp[i].label
                 temp[i].label = edges[0].weight + here.label
-                console.log('label2')
-                console.log(temp[i].label)
+                // console.log('label2')
+                // console.log(temp[i].label)
                 fibDecreaseKey(oldLabel, temp[i].label)
               } else {
                 console.log("ELSE WHAT")
@@ -69,7 +68,7 @@ function figuresStep () {
           }
           var update = dijkstra.instance.graph.getNode({ id: here.id })
           //update.fill = 'white' // TODO: get this to actually chnage color
-          console.log('marking ' + here.label)
+          // console.log('marking ' + here.label)
           update.topRightLabel = 1
           dijkstra.instance.selector.highlightNode({id: here.id})
           dijkstra.instance.selector.getEdges()
@@ -77,26 +76,25 @@ function figuresStep () {
           dijkstra.instance.selector.traverseOutgoingEdges({id: here.id})
 
           if (here.fill === 'blue') {
-            console.log('hello')
+            // console.log('hello')
             done = true
           } else {
-            resetAllCons()
-            console.log('extraction')
+            // console.log('extraction')
             var min = heap.extractMinimum()
             if (min.key === dijkstra.instance.options.data.nodes[0].label) {
               done = true
             } else {
+              resetAllCons()
               deleteNode(min)
+              levelize(0,0)
+
             }
-             levelize(0, 0)
           }
           dijkstra.instance.update()
         } else {
-          console.log('else what 2.5')
           figuresStep()
         }
       } else {
-        console.log('ELSE WHAT 3')
         figuresStep()
       }
     } else {
@@ -109,28 +107,22 @@ function figuresStep () {
 
 function nodecompare(a, b) {
   if (a.label < b.label) {
-    console.log(a.label + '<' + b.label)
     return -1
   } else {
-    console.log(b.label + '<' + a.label)
     return 1
   }
 }
 
 function nodecompareOp(a, b) {
   if (a.label < b.label) {
-    console.log(a.label + '<' + b.label)
     return 1
   } else {
-    console.log(b.label + '<' + a.label)
     return -1
   }
 }
 
 function fibInsert (val, id, color) {
   resetAllCons()
-  console.log(typeof(id))
-  console.log(id)
   heap.insert(val, id+1, color)
   count++
   levelize(0, 0)

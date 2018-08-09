@@ -139,7 +139,7 @@ function addNode (thisNode, parentNode, childNode, nextNode, prevNode) {
 
 function deleteNode (node) {
   if (node) {
-    console.log('deleting node: ' + node.key + ' ' + node.value)
+    //console.log('deleting node: ' + node.key + ' ' + node.value)
     nodeRels[node.value] = [undefined, undefined, undefined, undefined, undefined]
     instance.graph.removeNode({ id: node.value })
   }
@@ -308,7 +308,7 @@ var FibonacciHeap = function (div, height, width, customCompare) {
     }
   }).update()//  the greuler instance
 
-  console.log(instance.layout.linkDistance(10))
+  instance.layout.linkDistance(10)
 
 
   if (customCompare) {
@@ -382,7 +382,7 @@ FibonacciHeap.prototype.getNodeFromRels = function (nodeId) {
 }
 
 FibonacciHeap.prototype.deleteTranslate = function (nodeId) {
-  console.log('nodeId to delete ' + nodeId)
+  //console.log('nodeId to delete ' + nodeId)
   return this.delete(this.getNodeFromRels(nodeId))
 }
 
@@ -434,7 +434,7 @@ FibonacciHeap.prototype.extractMinimum = function () {
     if (extractedMin.next !== extractedMin) {
       nextInRootList = extractedMin.next
     }
-    console.log('remove node from list: ' + extractedMin.key + ' ' + extractedMin.value)
+    //console.log('remove node from list: ' + extractedMin.key + ' ' + extractedMin.value)
     removeNodeFromList(extractedMin)
     this.nodeCount--
     //  Merge the children of the minimum node with the root list
@@ -755,8 +755,8 @@ function getNodeListSize (node) {
  */
 function Node (key, value, color) {
   instance.graph.addNode({id: value, label: key, topRightLabel: 0, fill: color})
-  console.log("inserted as")
-  console.log(value)
+  //console.log("inserted as")
+  //console.log(value)
   this.key = key
   this.value = value
   this.prev = this

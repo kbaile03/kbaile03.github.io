@@ -6,13 +6,15 @@
     <meta charset="utf-8" />
     <title>Fibonacci Heaps and Dijkstra's Algorithm</title>
     <link rel="stylesheet" href="styles/style.css" />
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Noto+Sans" rel="stylesheet">
   </head>
 <body>
 
   <div id="contents">
     <div id="sections">
-      <p>Jump to Section:</p>
+      Jump to Section:
+      <br />
+      <br />
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Introduction">Introduction</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Dijkstra">Dijkstra's Algorithm</a>
       <a href="https://kbaile03.github.io/projects/fibo_dijk/fibo_dijk.html#Fibonacci">Fibonacci Heaps</a>
@@ -33,7 +35,16 @@
     <br />
     <h2 id="Introduction">Introduction</h2>
     <p>
-
+      The Shortest Path Problem is a simple, common, but practically applicable
+      problem in the realm of algorithms with real-world applications and
+      consequences. It’s the problem of finding the distance from one vertex in
+      a graph to every other vertex in the graph. In the real world, this
+      problem is most often translated to finding the shortest distance between
+      locations for land, water, and air travel, but it can also be used to
+      simulate networking and layout problems, and state-based problems, like
+      puzzles. This project demonstrates how the most well-known solution to
+      the Shortest Path Problem can be optimized using a data structure called a
+      Fibonacci Heap.
     </p>
 
     <h2 id="Dijkstra">Dijkstra's Algorithm</h2>
@@ -41,7 +52,8 @@
        between two nodes, called the initial node and the target node,
        respectively, on a weighted graph. In the example below, the initial
        node is always marked in red and the target node is always marked in
-       blue. The algorithm is as follows:
+       blue.
+       <h4>Algorithm Overview:</h4>
     <p>
       Let the distance of node Y be the distance from the initial node to Y. Dijkstra's algorithm will assign some initial distance values and will try to improve them step by step.
     </p>
@@ -74,9 +86,16 @@
              go back to step 3.</li>
        </ul>
     </p>
+
+    <h4>How to Use the Tool:</h4>
+    <p>
+      The "Randomize" button generates a semi-random graph with directed
+      and weighted edges. The "Step" button steps through Dijkstra's algorithm
+      until the shortest path is found.
+    </p>
+
     <div id="dijkstra_ex_parent">
-      <button id="reset_dijkstra_ex" onclick="dReset('dijkstra_ex', 500, 800, false)">Random Graph</button>
-      <button id="add_node_dijkstra_ex" onclick="dijkstra_ex"/>Add Node</button>
+      <button id="reset_dijkstra_ex" onclick="dReset('dijkstra_ex', 500, 800, false)">Randomize</button>
       <button id="step_dijkstra_ex" onclick="dStep()">Step</button>
       <div class="graph" id ="dijkstra_ex"></div>
       <div id="dijkstra_ex_solution"></div>
@@ -86,13 +105,23 @@
 
     <h2 id="Fibonacci">Fibonacci Heaps</h2>
     <p>
-      Interactive Fibonacci heap example:
+
     </p>
+
+    <h4>How to Use the Tool:</h4>
+    <p>
+      First, hit the "Initialize Heap" button to set up the heap. From there,
+      enter numerical values in the input box and hit the "Insert" button to
+      insert them into the heap. The "Delete Minimum" button removes the minimum
+      value from the heap and the "Delete Key" button deletes the value in the
+      input box from the heap if it exists.
+    </p>
+
     <div id="fibonacci_ex_parent">
-      <button id="fib_clear" onclick="fibClear()">Initialize heap</button>
+      <button id="fib_clear" onclick="fibClear()">Initialize Heap</button>
       <input id="fib_insert_key" type="number" value step="1" required/>
       <input id"test" type="submit" value="Insert" onclick="insert()"/>
-      <button id="fib_delete_min" onclick="deleteMin()">Delete Min</button>
+      <button id="fib_delete_min" onclick="deleteMin()">Delete Minimum</button>
       <input id="fib_delete_key" type="number" value step="1" required/>
       <input id"test" type="submit" value="Delete Key" onclick="deleteKey()"/>
       <div class="heap" id="fibonacci_ex"></div>
@@ -103,6 +132,8 @@
     <h2 id="Together">Putting Them Together</h2>
     <p>
     </p>
+
+
     <div id="figures_parent">
       <div>
         <button id="reset_figures" onclick="figuresReset()">Randomize</button>
@@ -116,21 +147,36 @@
       <div id="fibonacci_parent">
         <div class="heap half" id="fibonacci"></div>
       </div>
+
       <script src="js/dijkstra.js" type="text/javascript"></script>
       <script src="js/js-fibonacci-heap.js" type="text/javascript"></script>
       <script src="js/figures.js" type="text/javascript"></script>
     </div>
-
-    <h2 id="References">References</h2>
-    <p>
-      <ul>
-        <li></li>
-      </ul>
-    </p>
+    <br />
+    <br />
+    <div id="references">
+      <h2 id="References">References</h2>
+      <h4>Code:</h4>
+        <ul>
+          Visualization Tools:
+          <li><a href="https://mauriciopoppe.github.io/greuler/#/">Greuler</a></li>
+          <li><a href="http://ialab.it.monash.edu/webcola/">Webcola</a></li>
+          <li><a href="https://d3js.org/">D3.js</a></li>
+          <li><a href="https://www.cs.usfca.edu/~galles/visualization/FibonacciHeap.html">Interactive Fibonacci Heap Visualization</a></li>
+        </ul>
+        <ul>
+          Fibonacci Heap Implementation:
+          <li><a href="https://github.com/gwtw/js-fibonacci-heap">js-fibonacci-heap</a></li>
+        </ul>
+      <h4>Fibonacci Heaps:</h4>
+        <ul>
+          <li><a href ="">Item</a></li>
+        </ul>
+    </div>
   </div>
 
 
-  <div id="footer" class="page"/>
+  <div id="footer" class="page"><a href="mailto:kennedy.bailey@tufts.edu?Subject=Fibonacci%20Heaps%20and%20Dijkstra's%20Algorithm" target="_top">Contact Me</a></div>
 
 
 </body>

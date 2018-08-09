@@ -50,7 +50,11 @@ function deleteKey () {
   var x = parseInt(document.getElementById('fib_delete_key').value)
   if (!isNaN(x)) {
     resetAllCons()
-    deleteNode(heap.deleteTranslate(x))
+    try {
+      deleteNode(heap.deleteTranslate(x))
+    } catch (err) {
+      console.log('key does not exist')
+    }
     levelize(0, 0)
   }
 }
