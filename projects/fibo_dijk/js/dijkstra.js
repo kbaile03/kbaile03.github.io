@@ -123,6 +123,12 @@ Dijkstra.prototype.dijkstraStep = function () {
           //update.fill = 'white' // TODO: get this to actually chnage color
           // console.log('marking ' + here.label)
           update.topRightLabel = 1
+          if (update.fill === 'blue') {
+            console.log("dpn't do it")
+          } else {
+          this.instance.selector.getNode({id: here.id})
+            .attr('fill', '#9cab1f')
+          }
           this.instance.selector.highlightNode({id: here.id})
           this.instance.selector.getEdges()
             .attr('stroke', function (d) { return d.stroke })

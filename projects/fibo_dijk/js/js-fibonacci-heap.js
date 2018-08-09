@@ -3,9 +3,10 @@ var instance
 var nodeRels = [[]]
 nodeRels[0] = [undefined, undefined, undefined, undefined, false]
 
-var offsetSpace = 100
-var gapSpace = 50
-
+var offsetSpace = 70
+var gapSpace = 40
+var nodeRadius = 14
+var childGapSpace = 0
 //  functions for heap formatting only
 function levelize (nodeId, offset) {
   if (nodeRels[nodeId][4] === false) {
@@ -18,15 +19,46 @@ function levelize (nodeId, offset) {
       levelize(nodeRels[nodeId][3].value, offset)
     }
     if (nodeRels[nodeId][1] !== undefined) {
+      suggestLeft(nodeId, nodeRels[nodeId][1].value)
       levelize(nodeRels[nodeId][1].value, offset + offsetSpace)
     }
     if (nodeRels[nodeId][2] !== undefined) {
       levelize(nodeRels[nodeId][2].value, offset)
     }
+
   } else {
     //  console.log('nodeid was visited already: ' + nodeId)
   }
+  //console.log(instance.options.data.constraints)
+
   instance.update()
+}
+
+
+function weakVerticalConstraint (topNodeId, bottomNodeId, offset) {
+
+}
+
+function layoutStart () {
+  console.log("STARTIONG LAYOUT")
+  instance.layout.start(0, 100, 100, 0)
+
+}
+function layoutStop () {
+  instance.layout.stop()
+  instance.update()
+}
+
+function pushLeft (leftId, rightId) {
+  instance.options.data.constraints.push({axis: 'x', type: 'separation', left: getIndex(leftId), right: getIndex(rightId), gap: gapSpace, equality: true})
+}
+
+function suggestLeft(parentNodeId, childNodeId) {
+  var edges = instance.graph.getAllEdgesBetween({source: parentNodeId, target: childNodeId})
+  if (edges.length > 0 && !alignConstraintExists(parentNodeId, childNodeId)) {
+    instance.options.data.constraints.push({axis: 'x', left: getIndex(childNodeId), right: getIndex(parentNodeId), gap: childGapSpace})
+    instance.options.data.constraints.push({axis: 'x', left: getIndex(parentNodeId), right:getIndex(childNodeId), gap: ((childGapSpace+60) * -1)})
+  }
 }
 
 function gapify (leftNodeId, rightNodeId) {
@@ -75,8 +107,8 @@ function alignConstraintExists (leftNodeId, rightNodeId) {
 }
 
 function resetAllCons () {
-  // console.log(nodeRels)
-  // console.log(instance.options.data.constraints)
+   //console.log(nodeRels)
+   //console.log(instance.options.data.constraints)
   try {
     if (instance.options.data.constraints[0]) {
       for (var i = 0; i < instance.options.data.constraints[0].offsets.length; i++) {
@@ -107,10 +139,6 @@ function resetVisited () {
 function constrainToLevel (nodeId, offset) {
   // console.log('pushing constraint' + getIndex(nodeId) + ' ' + offset)
   instance.options.data.constraints[0].offsets.push({node: getIndex(nodeId), offset: offset})
-}
-
-function pushLeft (leftId, rightId) {
-  instance.options.data.constraints.push({axis: 'x', left: getIndex(leftId), right: getIndex(rightId), gap: gapSpace, equality: true})
 }
 
 function getIndex (nodeId) {
@@ -263,7 +291,7 @@ function unmarkNode (node) {
 //  visualization
 //
 
-var nodes = [{id: 0, label: 'min', fill: '#654c4f'}] //  id 0 will always be the min ptr
+var nodes = [{id: 0, label: 'min', fill: '#654c4f', r: nodeRadius}] //  id 0 will always be the min ptr
 var links = []
 var defaultColor = '#2980B9'
 var markedColor = 'red'
@@ -292,6 +320,7 @@ var FibonacciHeap = function (div, height, width, customCompare) {
       flowLayout: ['y', -1],
       nodes: nodes,
       links: links,
+      groups: [],
       constraints: [
         {
           type: 'alignment',
@@ -307,9 +336,10 @@ var FibonacciHeap = function (div, height, width, customCompare) {
       ]
     }
   })
-  instance.layout.linkDistance(10)
-  instance.update()//  the greuler instance
 
+  console.log(instance.layout._defaultNodeSize)
+  instance.update()//  the greuler instance
+  console.log(instance)
   if (customCompare) {
     this.compare = customCompare
   }
@@ -753,7 +783,8 @@ function getNodeListSize (node) {
  * @private
  */
 function Node (key, value, color) {
-  instance.graph.addNode({id: value, label: key, topRightLabel: 0, fill: color})
+  console.log("adding node")
+  instance.graph.addNode({id: value, label: key, topRightLabel: 0, fill: color, r: nodeRadius})
   //console.log("inserted as")
   //console.log(value)
   this.key = key

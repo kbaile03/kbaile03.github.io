@@ -12,10 +12,12 @@ function insert () {
   var x = parseInt(document.getElementById('fib_insert_key').value)
   try {
     if (!isNaN(x)) {
+      layoutStop()
       resetAllCons()
       heap.insert(x, count, '#9da9a0')
       count++
       levelize(0, 0)
+      layoutStart()
     }
   } catch (err) {
     console.log('node index' + count + ' is already taken, incrementing')
@@ -41,14 +43,17 @@ function fibClear () {
 
 
 function deleteMin () {
-  deleteNode(heap.extractMinimum())
+  layoutStop()
   resetAllCons()
+  deleteNode(heap.extractMinimum())
   levelize(0, 0)
+  layoutStart()
 }
 
 function deleteKey () {
   var x = parseInt(document.getElementById('fib_delete_key').value)
   if (!isNaN(x)) {
+    layoutStop()
     resetAllCons()
     try {
       deleteNode(heap.deleteTranslate(x))
@@ -56,5 +61,6 @@ function deleteKey () {
       console.log('key does not exist')
     }
     levelize(0, 0)
+    layoutStart()
   }
 }

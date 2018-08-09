@@ -174,6 +174,17 @@ svg {
   /* border-radius: 16px; */
 }
 
+#figures_parent {
+  margin: 0 auto;
+  width: 1000px;
+  font-family: "PT Sans", sans-serif;
+  line-height: 30px;
+  text-align: justify;
+  text-justify: auto;
+  color: rgb(20, 20, 10);
+  font-size: 18px;
+}
+
 #reset_figures {
   display: inline;
 }

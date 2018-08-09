@@ -4,7 +4,7 @@ var done = false
 greuler({
   directed: false,
   target: '#fibonacci',
-  width: 397,
+  width: 597,
   height: 600
 }).update()
 
@@ -15,18 +15,23 @@ function figuresReset () {
   dijkstra.dijkstraReset('dijkstra', 600, 397, true)
   fibbClear()
   done = false
+  //layoutStop()
   dijkstra.instance.options.data.nodes.forEach( function (n) {
     if (n.label === '∞') {
+      console.log("insert")
       fibInsert('∞', n.id, '#9da9a0')
     } else {
+      console.log("insert")
       fibInsert(n.label, n.id, '#9da9a0')
     }
   })
+  layoutStart()
 }
 
 
 
 function figuresStep () {
+  layoutStop()
   if (!done) {
     dijkstra.successors.sort(nodecompareOp)
     var here = dijkstra.successors.pop()
@@ -62,14 +67,14 @@ function figuresStep () {
               }
 
              }
-             // else {
-            //   console.log('ELSE WHAT 2')
-            //
-            // }
           }
           var update = dijkstra.instance.graph.getNode({ id: here.id })
-          //update.fill = 'white' // TODO: get this to actually chnage color
-          // console.log('marking ' + here.label)
+          if (update.fill === 'blue') {
+            console.log("dpn't do it")
+          } else {
+          dijkstra.instance.selector.getNode({id: here.id})
+            .attr('fill', '#9cab1f')
+          }
           update.topRightLabel = 1
           dijkstra.instance.selector.highlightNode({id: here.id})
           dijkstra.instance.selector.getEdges()
@@ -85,13 +90,12 @@ function figuresStep () {
             if (min.key === dijkstra.instance.options.data.nodes[0].label) {
               done = true
             } else {
+              console.log("HELLO")
               resetAllCons()
               deleteNode(heap.extractMinimum())
               levelize(0,0)
+              layoutStart()
             }
-
-
-
           }
           dijkstra.instance.update()
         } else {
@@ -132,23 +136,29 @@ function fibInsert (val, id, color) {
 }
 
 function fibDecreaseKey (oldkey, newkey) {
+  //layoutStop()
   resetAllCons()
   heap.decreaseKeyTranslate(oldkey, newkey)
   levelize(0, 0)
+  layoutStart()
 }
 
 function fibDeleteMin () {
+  layoutStop()
   deleteNode(heap.extractMinimum())
   resetAllCons()
   levelize(0, 0)
+  layoutStart()
 }
 
 function fibDeleteKey () {
   var x = parseInt(document.getElementById('fib_delete_key').value)
   if (!isNaN(x)) {
+    layoutStop()
     resetAllCons()
     deleteNode(heap.deleteTranslate(x))
     levelize(0, 0)
+    layoutStart()
   }
 }
 
@@ -165,7 +175,7 @@ function fibbClear () {
   newChild.id = 'fibonacci'
   parent.appendChild(newChild)
   count = 1
-  heap = new FibonacciHeap('fibonacci', 600, 397, compInfinity)
+  heap = new FibonacciHeap('fibonacci', 600, 597, compInfinity)
 }
 
 function compInfinity (a, b) {
