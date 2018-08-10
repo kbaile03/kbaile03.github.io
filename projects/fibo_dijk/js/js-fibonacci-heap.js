@@ -6,7 +6,7 @@ nodeRels[0] = [undefined, undefined, undefined, undefined, false]
 var offsetSpace = 70
 var gapSpace = 40
 var nodeRadius = 14
-var childGapSpace = 0
+var childGapSpace = 10
 //  functions for heap formatting only
 function levelize (nodeId, offset) {
   if (nodeRels[nodeId][4] === false) {
@@ -19,8 +19,9 @@ function levelize (nodeId, offset) {
       levelize(nodeRels[nodeId][3].value, offset)
     }
     if (nodeRels[nodeId][1] !== undefined) {
-      suggestLeft(nodeId, nodeRels[nodeId][1].value)
+
       levelize(nodeRels[nodeId][1].value, offset + offsetSpace)
+      suggestLeft(nodeId, nodeRels[nodeId][1].value)
     }
     if (nodeRels[nodeId][2] !== undefined) {
       levelize(nodeRels[nodeId][2].value, offset)
@@ -41,12 +42,21 @@ function weakVerticalConstraint (topNodeId, bottomNodeId, offset) {
 
 function layoutStart () {
   console.log("STARTIONG LAYOUT")
-  instance.layout.start(0, 100, 100, 0)
-
+  try {
+    instance.layout.start(0, 100, 100, 0)
+    //instance.update()
+  } catch (err) {
+    console.log("WHAT HAPPENED")
+  }
 }
 function layoutStop () {
-  instance.layout.stop()
-  instance.update()
+  try {
+    console.log('STOPPING LAYOUT');
+    instance.layout.stop()
+  } catch (err) {
+    console.log("IDK WHAT HAPPENED")
+  }
+  // instance.update()
 }
 
 function pushLeft (leftId, rightId) {
@@ -54,10 +64,11 @@ function pushLeft (leftId, rightId) {
 }
 
 function suggestLeft(parentNodeId, childNodeId) {
+  console.log("SUGGESTING LEFT on parent: " + parentNodeId + " child: " + childNodeId)
   var edges = instance.graph.getAllEdgesBetween({source: parentNodeId, target: childNodeId})
   if (edges.length > 0 && !alignConstraintExists(parentNodeId, childNodeId)) {
     instance.options.data.constraints.push({axis: 'x', left: getIndex(childNodeId), right: getIndex(parentNodeId), gap: childGapSpace})
-    instance.options.data.constraints.push({axis: 'x', left: getIndex(parentNodeId), right:getIndex(childNodeId), gap: ((childGapSpace+10) * -1)})
+    instance.options.data.constraints.push({axis: 'x', left: getIndex(parentNodeId), right: getIndex(childNodeId), gap: ((childGapSpace) * -1)})
   }
 }
 
@@ -124,7 +135,7 @@ function resetAllCons () {
       }
     }
     resetVisited()
-    instance.update()
+    //instance.update()
   } catch (err) {
     console.log('error deleting all constraints')
   }
@@ -176,7 +187,7 @@ function deleteNode (node) {
 function setDegree (node, newDegree) {
   var update = instance.graph.getNode({ id: node.value })
   update.topRightLabel = newDegree
-  instance.update()
+  //instance.update()
 }
 
 function addRel (node1, rel, node2) {
@@ -207,7 +218,7 @@ function addRel (node1, rel, node2) {
       var edge = {source: node1.value, target: node2.value, directed: false}
       instance.graph.addEdge(edge)
     }
-    instance.update()
+    //instance.update()
   }
 }
 
@@ -246,14 +257,14 @@ function pointMin (node) {
   if (node) {
     var edge = { source: 0, target: node.value, directed: true }
     instance.graph.addEdge(edge)
-    instance.update()
+    //instance.update()
   }
 }
 
 function updateKey (node, newKey) {
   var update = instance.graph.getNode({id: node.value})
   update.label = newKey
-  instance.update()
+  //instance.update()
 }
 
 function markNode (node) {
@@ -336,9 +347,9 @@ var FibonacciHeap = function (div, height, width, customCompare) {
       ]
     }
   })
-
+  instance.update()
   console.log(instance.layout._defaultNodeSize)
-  instance.update()//  the greuler instance
+  //instance.update()//  the greuler instance
   console.log(instance)
   if (customCompare) {
     this.compare = customCompare
@@ -425,7 +436,7 @@ FibonacciHeap.prototype.decreaseKeyTranslate = function (nodeId, key) {
  * @param {Node} node The node to delete.
  */
 FibonacciHeap.prototype.delete = function (node) {
-  // console.log('in delete')
+   console.log('in delete')
   //  This is a special implementation of decreaseKey that sets the argument to
   //  the minimum value. This is necessary to make generic keys work, since there
   //  is no MIN_VALUE constant for generic types.
@@ -798,5 +809,5 @@ function Node (key, value, color) {
   this.isMarked = undefined
 
   addNode(this, undefined, undefined, this, this)
-  instance.update()
+  //instance.update()
 }
