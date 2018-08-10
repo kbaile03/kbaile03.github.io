@@ -1,0 +1,11 @@
+fibo_dijk - Aug 2018
+
+- an interactive visual tool demonstrating fibonacci heaps in use as
+priority queues for Dijkstra's Algorithm
+
+Kennedy Bailey - kennedy.bailey@tufts.edu
+
+known bugs -
+  # the heap visualization occasionally loses track of its constraints
+      and throws an uncatchable error which results in the page needing to
+      be refreshed
