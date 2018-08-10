@@ -229,6 +229,10 @@ svg {
   background-color: var(--c3);
 }
 
+.outer-top-right {
+  fill: var(--c4);
+}
+
 #fib_insert_key {
   width: 50px;
 }

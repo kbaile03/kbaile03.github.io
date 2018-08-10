@@ -45,8 +45,11 @@ function fibClear () {
 function deleteMin () {
   layoutStop()
   resetAllCons()
+  console.log("extract")
   deleteNode(heap.extractMinimum())
+  console.log("levelize")
   levelize(0, 0)
+  console.log("and start")
   layoutStart()
 }
 
