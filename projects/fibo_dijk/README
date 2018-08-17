@@ -9,3 +9,46 @@ known bugs -
   # the heap visualization occasionally loses track of its constraints
       and throws an uncatchable error which results in the page needing to
       be refreshed
+  # the heap visualization sometimes overlaps constraints, even though it
+      is built to avoid overlaps.
+
+
+# Considerations for Implementation of the Greuler/Cola/D3 Graphs #
+
+  - The implementation of the Dijkstra graphs was very simple and easy
+      because that is the kind of graph this package is intended to be
+      used for.
+
+  - I had a lot of problems implementing the heap animations - mostly because
+      when I first started, my understanding of Greuler, Cola, and D3 was very
+      different from where I ended up with it. I made the decision to integrate
+      the visualization and Cola operations into the data structure itself, so
+      I wouldn't have to separately keep track of changes to the data structure
+      and to the visualization. This decision meant that I needed to make fairly
+      significant changes to code that I didn't write, and as my knowledge of
+      Cola developed, I had to keep making changes to my strategy to shoot for
+      the best functionality and look possible.
+
+      Cola generally handles spacing of nodes and edges on its own, given user-input
+      spacing strategies, however, it allows for two kinds of constraints, alignment
+      constraints and inequality constraints. Alignment constraints determine where
+      a node is relative to the X or Y axis. This was useful for making the different
+      levels of the heap, but I originally tried to implement this using inequality
+      constraints, which basically say "this node must be at least X in some direction
+      from another node". Thus inequality constraints are more powerful and specific,
+      but are prone to some bugginess, especially with redundancies or symmetries.
+      I eventually changed my approach to eliminate all constraints on each change to
+      the heap and to reconfigure them each time, which is a huge performance cost,
+      but led to the best overall constraint management. The reason for the bugs in
+      the horizontal alignment is that the pointers between the nodes determine
+      inequality constraints on that level, so when a two nodes in the parent list have
+      children, the children are spaced correctly with respect to themselves, but have no
+      constraints with respect to another group of children. Basically this means
+      that the order in which the nodes are spawned upon redrawing determines overlap,
+      and since nodes collide with each other, they get stuck if they are on the same vertical
+      alignment as nodes they don't have inequality constraints with if they are spawned
+      in the wrong place.
+
+      There are certainly better ways to handle the drawing of the heap and the constraints,
+      but my time frame and lack of experience with Cola and Greuler and D3 lead me to this
+      current method.
