@@ -38,7 +38,7 @@ body {
   display: block;
   width: 100%;
   text-align: center;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Concert One", cursive;
   color: white;
 }
 
@@ -74,23 +74,35 @@ body {
   width: 100%;
   height: 400px;
   display: block;
-  background-color: blue;
+  background-image: url("../images/group_pics/practice_room.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #members {
   display: inline-block;
   height: 400px;
-  background-color: yellow;
+  background-image: url("../images/group_pics/od_profile.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #gigs {
   width: 100%;
   height: 400px;
-  background-color: green;
+  background-image: url("../images/group_pics/travis_solo.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 
 #contactUs {
   display: inline-block;
   height: 400px;
-  background-color: red;
+  background-image: url("../images/group_pics/group_casual.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
