@@ -59,27 +59,33 @@ body {
   color: white;
 }
 
+a {
+  text-decoration: none;
+}
+
 #sections .whole {
-  margin: 0px;
+  margin: 0 auto;
   width: 100%;
-  transition: all .5s;
+  color: yellow;
+  transition: all .2s;
   -webkit-transition: all .5s;
 }
 
 #sections .whole:hover {
-  margin: 10px;
+  color: white;
   width: calc(100% - 20px);
 }
 
 .half {
-  margin: 0px;
+  margin: 0 auto;
   width: 50%;
-  transition: all .5s;
+  color: yellow;
+  transition: all .2s;
   -webkit-transition: all .5s;
 }
 
 .half:hover {
-  margin: 10px;
+  color: white;
   width: calc(50% - 20px);
 }
 .sectionText {
