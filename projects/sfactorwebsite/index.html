@@ -8,6 +8,20 @@
       <title>S-Factor</title>
   </head>
   <body>
+
+    <!-- facebook api -->
+
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+
+
+
     <div id="header" class="pageEl card">
       <div id="circle" class="card">
         <img id="icon" src="images/Logo/sfactor_W.png" alt="s-factor logo"/>
@@ -35,12 +49,16 @@
       <div id="socials" class="card whole">
         <div class ="sectionText">
           Follow Us!
-          <div id="yt">
+          <div id="yt" class="social">
             <script src="https://apis.google.com/js/platform.js"></script>
             <div class="g-ytsubscribe" data-channelid="UCT1wTNAwrT6W1oojPfdRKAg" data-layout="default" data-count="default"></div>
             </div>
-          <div>
-
+          <div id="fb" class="social">
+            <div class="fb-page" data-href="https://www.facebook.com/tufts.sfactor/" data-small-header="true" data-adapt-container-width="true" data-hide-cover="true" data-show-facepile="false">
+              <blockquote cite="https://www.facebook.com/tufts.sfactor/" class="fb-xfbml-parse-ignore">
+                <a href="https://www.facebook.com/tufts.sfactor/">Tufts&#039; S-Factor</a>
+              </blockquote>
+            </div>
           </div>
         </div>
       </div>
