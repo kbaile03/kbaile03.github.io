@@ -76,6 +76,10 @@ a {
   width: calc(100% - 20px);
 }
 
+#two {
+  margin: 0 auto;
+}
+
 .half {
   margin: 0 auto;
   width: 50%;
@@ -134,6 +138,11 @@ a {
 
 #socials {
   background-color: black;
+  color: yellow;
+  display: inline-block;
+  height: 400px;
+}
+#news {
   display: inline-block;
   height: 400px;
 }
