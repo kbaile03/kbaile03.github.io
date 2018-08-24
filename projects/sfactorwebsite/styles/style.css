@@ -136,15 +136,18 @@ a {
   background-position: center;
 }
 
-#socials {
-  background-color: black;
-  color: yellow;
-  display: inline-block;
-  height: 400px;
-}
+
 #news {
   display: inline-block;
   height: 400px;
+}
+
+#socials {
+  height: 400px;
+}
+
+#links {
+  margin-top: 40px;
 }
 
 #yt {
@@ -154,6 +157,17 @@ a {
 }
 
 .social {
-  width: 300px;
-  display: inline-block;
+  height: 60px;
+  padding: 20px;
+}
+
+.icon {
+  height: 40px;
+  width:auto;
+  transition: all .5s;
+  vertical-align: middle;
+}
+
+.icon:hover {
+  height: 50px;
 }
