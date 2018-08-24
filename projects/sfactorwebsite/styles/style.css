@@ -171,3 +171,44 @@ a {
 .icon:hover {
   height: 50px;
 }
+
+
+
+
+/* MEMBERS PAGE */
+#men {
+  margin-top: 40px;
+  font-size: 0;
+}
+
+.person {
+  font-size: 20px;
+  display: inline-block;
+  background-color: white;
+  width: 25vw;
+  height: 25vw;
+  transition: all 1s;
+}
+
+p {
+  margin: 0;
+  font-family: "Shrikhand", cursive;
+  color: white;
+  width: inherit;
+  height: inherit;
+  line-height: 25vw;
+  position: absolute;
+  font-size: 0px;
+  text-align: center;
+  transition: all 1s;
+}
+
+p:hover {
+  font-size: 40px;
+}
+
+.prof_pic {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
