@@ -7,31 +7,135 @@ var members = [
     lname: 'Percy',
     photo: 'images/members/travis.jpg',
     quote: 'blah blah',
+    onEboard: false,
+    title: '',
     part: 'T2',
     year: '2018',
     major: 'Everything',
     fb: false,
     ig: true,
     sc: true,
-    fbl: 'https://facebook.com',
-    igl: 'https://instagram.com',
-    scl: 'https://snapchat.com'
+    scld: true,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: 'kennedy-bailey-612002265'
   },
   {
     fname: 'Odeosa',
     lname: 'Idahor',
     photo: 'images/members/odeosa.jpg',
     quote: 'blah blah',
+    onEboard: false,
+    title: '',
     part: 'T1',
     year: '2018',
     major: 'Pre Med',
     fb: true,
     ig: true,
     sc: true,
-    fbl: 'https://facebook.com',
-    igl: 'https://instagram.com',
-    scl: 'https://snapchat.com'
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Ethan',
+    lname: 'Chen',
+    photo: 'images/members/ethan.jpg',
+    quote: 'blah blah',
+    onEboard: true,
+    title: 'Business Manager',
+    part: 'B1',
+    year: '2019',
+    major: 'Computer Science, Economics',
+    fb: false,
+    ig: false,
+    sc: false,
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Michael',
+    lname: 'Kodua',
+    photo: 'images/members/michael.jpg',
+    quote: 'blah blah',
+    onEboard: true,
+    title: 'President',
+    part: 'T1',
+    year: '2018',
+    major: 'Pre Med',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Henry',
+    lname: 'Li',
+    photo: 'images/members/henry.jpg',
+    quote: 'blah blah',
+    onEboard: false,
+    title: '',
+    part: 'B1',
+    year: '2020',
+    major: '',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Edwin',
+    lname: 'Jain',
+    photo: 'images/members/edwin.jpg',
+    quote: 'blah blah',
+    onEboard: true,
+    title: 'Music Director',
+    part: 'T2',
+    year: '2019',
+    major: 'Literally everything',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Isaiah',
+    lname: 'Marshall-Thomas',
+    photo: 'images/members/isaiah.jpg',
+    quote: 'blah blah',
+    onEboard: false,
+    title: '',
+    part: 'B2',
+    year: '2019',
+    major: '',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: false,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
   }
+
 ]
 
 
@@ -66,14 +170,18 @@ function showCurr(lname) {
               members[i].major + ', ' + members[i].year + '</span></br><div id ="currLinks">'
 
       if (members[i].fb) {
-        html += '<a id="fb" href="' + members[i].fbl + '" class="social"><img class="icon" src="images/icons/fb_icon_full.png" /></a>'
+        html += '<a id="fb" href="https://facebook.com/' + members[i].fbl + '" class="social"><img class="icon" src="images/icons/fb_icon_full.png" /></a>'
       }
       if (members[i].ig) {
-        html += '<a id="ig" href="' + members[i].fbl + '" class="social"><img class="icon" src="images/icons/IG_Glyph_Fill.png" /></a>'
+        html += '<a id="ig" href="https://instagram.com/' + members[i].fbl + '" class="social"><img class="icon" src="images/icons/IG_Glyph_Fill.png" /></a>'
       }
       if (members[i].sc) {
-        html += '<a id="sc" href="' + members[i].scl + '" class="social"><img class="icon" src="images/icons/snap-ghost-yellow.png" /></a>'
+        html += '<a id="sc" href="https://snapchat.com/add/' + members[i].scl + '" class="social"><img class="icon" src="images/icons/snap-ghost-yellow.png" /></a>'
       }
+      if (members[i].scld) {
+        html += '<a id="scld" href="https://soundcloud.com/' + members[i].scldl + '" class="social"><img class="icon" src="images/icons/scld_icon.png" /></a>'
+      }
+
       html += '</div></div><div id ="currRight"><img id="currPhoto" src="' + members[i].photo + '" /></div>'
 
       curr.innerHTML += html
