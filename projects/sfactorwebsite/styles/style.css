@@ -1,8 +1,15 @@
+/* MAIN PAGE */
+
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
   background-color: black;
+}
+
+.hideMe {
+  display: none !important;
 }
 
 .pageEl {
@@ -49,6 +56,8 @@ body {
 .card:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+/* PICTURES STYLING */
 
 #sections {
   margin-top: 40px;
@@ -142,6 +151,8 @@ a {
   height: 400px;
 }
 
+/* SOCIALS STYLING  */
+
 #socials {
   height: 400px;
 }
@@ -219,8 +230,8 @@ a {
   font-size: 20px;
   display: inline-block;
   background-color: white;
-  width: 25vw;
-  height: 25vw;
+  width: 50vw;
+  height: 50vw;
   transition: all 1s;
 }
 
@@ -230,7 +241,7 @@ p {
   color: white;
   width: inherit;
   height: inherit;
-  line-height: 25vw;
+  line-height: 50vw;
   position: absolute;
   font-size: 0px;
   text-align: center;
@@ -245,4 +256,96 @@ p:hover {
   height: 100%;
   width: 100%;
   object-fit: cover;
+}
+
+#background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.8);
+  z-index: 10;
+}
+
+#current {
+  display: block;
+  background-color: white;
+  position: fixed;
+  top: calc(50% - 200px);
+  width: calc(100% - 40px);
+  height: 400px;
+  margin: 20px 0px 0px 20px;
+  z-index: 11;
+}
+
+#close_button {
+  height: 20px;
+  width: auto;
+  position: fixed;
+  margin-left: -15px;
+  margin-top: 5px;
+  transition: all 1s;
+}
+
+#close_button:hover {
+  height: 30px;
+  width: auto;
+}
+
+#currPhoto {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+#currLeft {
+  float: left;
+  background-color: white;
+  height: 100%;
+  width: calc(50% - 60px);
+  padding: 0px 20px 0px 20px;
+}
+
+#currRight {
+  float: right;
+  margin: 10px;
+  width: 50%;
+  height: calc(100% - 20px);
+}
+
+#currLinks {
+  text-align: center;
+  padding-top: 40px;
+}
+
+h1 {
+  text-align: center;
+  font-family: "Shrikhand", cursive;
+  font-weight: 50;
+  font-size: 40px;
+  color: black;
+  margin-bottom: 0;
+}
+
+h2 {
+  margin-top: 0;
+  text-align: center;
+  font-family: "Concert One", cursive;
+  font-style: italic;
+  font-weight: 50;
+  font-size: 20px;
+  color: black;
+
+}
+
+b {
+  font-family: "Shrikhand", cursive;
+  font-size: 20px;
+  color: black;
+}
+
+span {
+  font-family: "Concert One", cursive;
+  font-size: 20px;
+  line-height: 40px;
+  color: black;
 }

@@ -1,0 +1,13 @@
+README - sfactor website
+Initially created Aug/Sept 2018 by Kennedy Bailey
+
+
+
+Notes:
+
+  The members page uses JSON data to populate the page with member info,
+  but there are a few invariants it relies on -
+    - distinct last names
+    - member photos exist in members directory with name "lastname.jpg"
+    - member photos should be cropped such that the person's face is
+        centered or slightly above the center
