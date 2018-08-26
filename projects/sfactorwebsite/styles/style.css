@@ -145,6 +145,9 @@ a {
 #socials {
   height: 400px;
 }
+#socials .sectionText {
+  top: 100px;
+}
 
 #links {
   margin-top: 40px;
@@ -172,7 +175,38 @@ a {
   height: 50px;
 }
 
+/* media queries  */
 
+@media only screen and (max-width: 950px) {
+	.sectionText {
+    top: 150px;
+    font-size: 60px;
+  }
+}
+
+@media only screen and (max-width: 730px) {
+	.sectionText {
+    top: 160px;
+    font-size: 40px;
+  }
+  .half:hover {
+    color: white;
+    width: calc(50% - 5px);
+  }
+}
+
+@media only screen and (max-width: 480px) {
+	.sectionText {
+    top: 180px;
+    font-size: 20px;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+	.sectionText {
+    font-size: 10px;
+  }
+}
 
 
 /* MEMBERS PAGE */
