@@ -1,12 +1,12 @@
 window.onload = init
 
-
 var members = [
   {
     fname: 'Travis',
     lname: 'Percy',
     photo: 'images/members/travis.jpg',
     quote: 'blah blah',
+    song: 'Psycho - Post Malone',
     onEboard: false,
     title: '',
     part: 'T2',
@@ -26,6 +26,7 @@ var members = [
     lname: 'Idahor',
     photo: 'images/members/odeosa.jpg',
     quote: 'blah blah',
+    song: 'Something - Brandy',
     onEboard: false,
     title: '',
     part: 'T1',
@@ -45,6 +46,7 @@ var members = [
     lname: 'Chen',
     photo: 'images/members/ethan.jpg',
     quote: 'blah blah',
+    song: '',
     onEboard: true,
     title: 'Business Manager',
     part: 'B1',
@@ -64,9 +66,10 @@ var members = [
     lname: 'Kodua',
     photo: 'images/members/michael.jpg',
     quote: 'blah blah',
+    song: 'something good',
     onEboard: true,
     title: 'President',
-    part: 'T1',
+    part: 'B1',
     year: '2018',
     major: 'Pre Med',
     fb: true,
@@ -83,6 +86,7 @@ var members = [
     lname: 'Li',
     photo: 'images/members/henry.jpg',
     quote: 'blah blah',
+    song: '',
     onEboard: false,
     title: '',
     part: 'B1',
@@ -102,6 +106,7 @@ var members = [
     lname: 'Jain',
     photo: 'images/members/edwin.jpg',
     quote: 'blah blah',
+    song: '',
     onEboard: true,
     title: 'Music Director',
     part: 'T2',
@@ -121,6 +126,7 @@ var members = [
     lname: 'Marshall-Thomas',
     photo: 'images/members/isaiah.jpg',
     quote: 'blah blah',
+    song: '',
     onEboard: false,
     title: '',
     part: 'B2',
@@ -129,7 +135,47 @@ var members = [
     fb: true,
     ig: true,
     sc: true,
-    scld: false,
+    scld: true,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Jordan',
+    lname: 'Barnes',
+    photo: 'images/members/jordan.jpg',
+    quote: 'blah blah',
+    song: 'Bright Side - Kennedy Bailey',
+    onEboard: true,
+    title: 'Brotherhood Chair',
+    part: 'B1',
+    year: '2019',
+    major: '',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: true,
+    fbl: '',
+    igl: '',
+    scl: '',
+    scldl: ''
+  },
+  {
+    fname: 'Kennedy',
+    lname: 'Bailey',
+    photo: 'images/members/kennedy.jpg',
+    quote: 'blah blah',
+    song: 'Wake Up - Beyoncé',
+    onEboard: false,
+    title: '',
+    part: 'T1',
+    year: '2018',
+    major: '',
+    fb: true,
+    ig: true,
+    sc: true,
+    scld: true,
     fbl: '',
     igl: '',
     scl: '',
@@ -163,10 +209,12 @@ function showCurr(lname) {
               members[i].fname + ' ' + members[i].lname + '</h1>'
       if (members[i].onEboard) {
         html += '<h2>' + members[i].title + '</h2>'
+      } else {
+        html += '<h2></h2>'
       }
       html += '<span><b>Voice Part: </b>' + members[i].part + '</span></br><span><b>Favorite Song: </b>' +
               members[i].song + '</span></br><span><b>Quote: </b>' +
-              members[i].quote + '<span></br><span><b>Major/Grad Year: </b>' +
+              members[i].quote + '</span></br><span><b>Major/Grad Year: </b>' +
               members[i].major + ', ' + members[i].year + '</span></br><div id ="currLinks">'
 
       if (members[i].fb) {

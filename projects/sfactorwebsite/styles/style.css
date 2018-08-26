@@ -5,7 +5,7 @@ body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: black;
+  background-color: #111111;
 }
 
 .hideMe {
@@ -18,7 +18,7 @@ body {
   width: 100%;
   height: 40px;
   background-color: black;
-  z-index: 500;
+  z-index: 20;
 }
 
 #header {
@@ -29,10 +29,10 @@ body {
   position:relative;
   top: 0px;
   background-color: black;
-  margin: 0 auto;
-  display: block;
   height:150px;
   width:150px;
+  margin: 0 auto;
+  display: block;
   border-radius: 50%;
 }
 
@@ -186,38 +186,7 @@ a {
   height: 50px;
 }
 
-/* media queries  */
 
-@media only screen and (max-width: 950px) {
-	.sectionText {
-    top: 150px;
-    font-size: 60px;
-  }
-}
-
-@media only screen and (max-width: 730px) {
-	.sectionText {
-    top: 160px;
-    font-size: 40px;
-  }
-  .half:hover {
-    color: white;
-    width: calc(50% - 5px);
-  }
-}
-
-@media only screen and (max-width: 480px) {
-	.sectionText {
-    top: 180px;
-    font-size: 20px;
-  }
-}
-
-@media only screen and (max-width: 300px) {
-	.sectionText {
-    font-size: 10px;
-  }
-}
 
 
 /* MEMBERS PAGE */
@@ -245,11 +214,11 @@ p {
   position: absolute;
   font-size: 0px;
   text-align: center;
-  transition: all 1s;
+  transition: all .5s;
 }
 
 p:hover {
-  font-size: 40px;
+  font-size: 10vw;
 }
 
 .prof_pic {
@@ -270,9 +239,9 @@ p:hover {
   display: block;
   background-color: white;
   position: fixed;
-  top: calc(50% - 200px);
+  top: calc(50% - 250px);
   width: calc(100% - 40px);
-  height: 400px;
+  height: 500px;
   margin: 20px 0px 0px 20px;
   z-index: 11;
 }
@@ -313,17 +282,20 @@ p:hover {
 }
 
 #currLinks {
+  position: absolute;
+  width: calc(50% - 50px);
   text-align: center;
-  padding-top: 40px;
+  bottom: 20px;
 }
 
 h1 {
   text-align: center;
   font-family: "Shrikhand", cursive;
   font-weight: 50;
-  font-size: 40px;
+  font-size: 4vw;
   color: black;
   margin-bottom: 0;
+  line-height: 4vw;
 }
 
 h2 {
@@ -332,20 +304,132 @@ h2 {
   font-family: "Concert One", cursive;
   font-style: italic;
   font-weight: 50;
-  font-size: 20px;
+  font-size: 2vw;
+  line-height: 1vw;
   color: black;
+  margin-bottom: 40px;
 
 }
 
 b {
   font-family: "Shrikhand", cursive;
-  font-size: 20px;
+  font-size: 2.5vw;
+  font-weight: 100;
   color: black;
 }
 
 span {
   font-family: "Concert One", cursive;
-  font-size: 20px;
-  line-height: 40px;
+  font-size: 2vw;
+  line-height: 3vw;
+  font-weight: 100;
   color: black;
+}
+
+/* ABOUT US */
+
+#aboutContent {
+  padding: 20px;
+  margin-top:100px;
+  background-color: blue;
+}
+
+.headerLink {
+  display: block;
+  width: 100px;
+  color: white;
+  font-size: 14px;
+  font-family: "Concert One", cursive;
+  position: absolute;
+  z-index: 21;
+}
+
+h3 {
+  text-align: center;
+  font-size: 50px;
+  font-weight: 50;
+  color: white;
+  font-family: "Concert One", cursive;
+}
+
+
+/* media queries  */
+
+@media only screen and (max-width: 950px) {
+	.sectionText {
+    top: 150px;
+    font-size: 60px;
+  }
+
+  b {
+    font-size: 3vw;
+  }
+
+  span {
+    font-size: 3vw;
+    line-height: 5vw;
+  }
+  .social {
+    padding: 1vw;
+  }
+}
+
+
+@media only screen and (max-width: 730px) {
+	.sectionText {
+    top: 160px;
+    font-size: 40px;
+  }
+  .half:hover {
+    color: white;
+    width: calc(50% - 5px);
+  }
+
+  h1 {
+    font-size: 5vw;
+  }
+  h2 {
+    font-size: 3vw;
+    line-height: 3vw;
+  }
+  b {
+    font-size: 4vw;
+  }
+  span {
+    font-size: 4vw;
+    line-height: 4vw;
+  }
+  .icon {
+    height: 30px;
+  }
+  .icon:hover {
+    height: 40px;
+  }
+
+}
+
+@media only screen and (max-width: 480px) {
+	.sectionText {
+    top: 180px;
+    font-size: 20px;
+  }
+
+}
+
+@media only screen and (max-width: 300px) {
+	.sectionText {
+    font-size: 10px;
+  }
+  .person {
+    width: 100vw;
+    height: 100vw;
+  }
+
+  p {
+    line-height: 100vw;
+  }
+
+  p:hover {
+    font-size: 20vw;
+  }
 }
