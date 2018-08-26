@@ -11,3 +11,5 @@ Notes:
     - member photos exist in members directory with name "lastname.jpg"
     - member photos should be cropped such that the person's face is
         centered or slightly above the center
+    - if any booleans in the JSON data are true, pls ensure there is
+        proper data for whatever that corresponds to

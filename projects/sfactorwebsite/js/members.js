@@ -13,9 +13,9 @@ var members = [
     fb: false,
     ig: true,
     sc: true,
-    fbl: 'facebook.com',
-    igl: 'instagram.com',
-    scl: 'snapchat.com'
+    fbl: 'https://facebook.com',
+    igl: 'https://instagram.com',
+    scl: 'https://snapchat.com'
   },
   {
     fname: 'Odeosa',
@@ -28,9 +28,9 @@ var members = [
     fb: true,
     ig: true,
     sc: true,
-    fbl: 'facebook.com',
-    igl: 'instagram.com',
-    scl: 'snapchat.com'
+    fbl: 'https://facebook.com',
+    igl: 'https://instagram.com',
+    scl: 'https://snapchat.com'
   }
 ]
 
