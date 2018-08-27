@@ -26,12 +26,12 @@ body {
   height:100px;
 }
 #circle {
-  position:relative;
+  position:absolute;
   top: 0px;
   background-color: black;
   height:150px;
   width:150px;
-  margin: 0 auto;
+  left: calc(50% - 75px);
   display: block;
   border-radius: 50%;
 }
@@ -334,14 +334,22 @@ span {
   background-color: blue;
 }
 
-.headerLink {
+#headerLinks {
   display: block;
+  top: 20px;
+  width: 100%;
+}
+
+.headerLink {
+  display: inline-block;
   width: 100px;
   color: white;
-  font-size: 14px;
+  top: 45px;
+  font-size: 20px;
   font-family: "Concert One", cursive;
-  position: absolute;
-  z-index: 21;
+  position: relative;
+  padding: 5%;
+  z-index: 24;
 }
 
 h3 {
