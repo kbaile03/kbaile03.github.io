@@ -7,10 +7,14 @@ Notes:
 
   The members page uses JSON data to populate the page with member info,
   but there are a few invariants it relies on -
-    - distinct last names
-    - member photos exist in members directory with name "lastname.jpg"
+    - member photos exist in images/members/ with name "firstnamelastname.jpg" (all lowercase)
     - member photos should be cropped such that the person's face is
         centered or slightly above the center
     - if any booleans in the JSON data are true, pls ensure there is
         proper data for whatever that corresponds to
-    
+
+  The python script input_form.py is a simple program that can write the JSON
+  data for you from user input. It writes it to a file "data.json" which can be
+  copied verbatim to the list variable member in members.js to populate the members
+  page correctly. you can also use it for single users but have to append the data
+  in members.js correctly.
