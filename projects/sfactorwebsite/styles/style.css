@@ -1,11 +1,51 @@
 /* MAIN PAGE */
 
 
+:root {
+  --bc: #1a111a; /* background color variable */
+  --hc: #0a000a; /* header/footer color varible */
+  --mc: #333; /* menu color variable */
+  --ptc: white;
+  --stc: #ffffaa;
+  --cbc: white;
+  --cptc: black;
+  --cstc: blue;
+
+  /* Primary Fonts */
+
+  --f1: "Shrikhand", cursive;
+  --f2: "Concert One", cursive;
+
+  /* Test Fonts */
+
+  --t1: 'Contrail One', cursive;
+  --t2: 'Yeseva One', cursive;
+  --t3: 'Bungee', cursive;
+  --t4: 'Racing Sans One', cursive;
+  --t5: 'Lilita One', cursive;
+  --t6: 'Sail', cursive;
+  --t7: 'Baloo Thambi', cursive;
+  --t8: 'Kumar One', cursive;
+  --t8: 'Molle', cursive;
+
+}
+
+/* expandables */
+
+.content {
+  display: block;
+  overflow: hidden;
+  background-color: blue;
+  height: 0px;
+  transition: height .5s;
+  bottom: 0px;
+}
+
 body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background-color: #111111;
+  background-color: var(--bc);
 }
 
 .hideMe {
@@ -17,7 +57,7 @@ body {
   display: block;
   width: 100%;
   height: 40px;
-  background-color: black;
+  background-color: var(--hc);
   z-index: 20;
 }
 
@@ -28,7 +68,7 @@ body {
 #circle {
   position:absolute;
   top: 0px;
-  background-color: black;
+  background-color: var(--hc);
   height:150px;
   width:150px;
   left: calc(50% - 75px);
@@ -45,6 +85,26 @@ body {
   height: 50px;
   width: auto;
 }
+
+#menu {
+  background-color: var(--mc);
+  font-family: var(--f1);
+  font-size: 20px;
+  color: var(--ptc);
+  position: fixed;
+  top: calc(40% - 90px);
+  left: -190px;
+  display: block;
+  width: 200px;
+  height: 180px;
+  z-index: 19;
+  transition: 1s left;
+}
+
+#menu:hover {
+  left: 0px;
+}
+
 #footer {
   bottom: 0px;
 }
@@ -64,46 +124,60 @@ body {
   display: block;
   width: 100%;
   text-align: center;
-  font-family: "Shrikhand", cursive;
-  color: white;
+  font-family: var(--f1);
+  color: var(--ptc);
 }
 
 a {
   text-decoration: none;
+  color: var(--ptc);
+}
+
+/* visited link */
+a:visited {
+    color: var(--stc);
+}
+
+/* mouse over link */
+a:hover {
+    color: hotpink;
 }
 
 #sections .whole {
   margin: 0 auto;
   width: 100%;
-  color: yellow;
+  color: var(--stc);
   transition: all .2s;
   -webkit-transition: all .5s;
 }
 
 #sections .whole:hover {
-  color: white;
+  color: var(--ptc);
   width: calc(100% - 20px);
+  z-index: 5;
 }
 
-#two {
+/* #two {
   margin: 0 auto;
 }
 
 .half {
   margin: 0 auto;
   width: 50%;
-  color: yellow;
+  color: var(--stc);
   transition: all .2s;
   -webkit-transition: all .5s;
 }
 
 .half:hover {
-  color: white;
+  color: var(--ptc);
   width: calc(50% - 20px);
-}
+} */
 .sectionText {
   position: relative;
-  top: 140px;
+  top: 50%;
+  transform: translate(0, -50%);
+  /* top: 140px; */
   font-size: 80px;
   margin: 0 auto;
   z-index: 15;
@@ -116,15 +190,17 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: .5s height;
 }
 
 #members {
-  display: inline-block;
+  display: block;
   height: 400px;
   background-image: url("../images/group_pics/od_profile.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: .5s height;
 }
 
 #gigs {
@@ -133,33 +209,35 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: .5s height;
 }
 
 #contactUs {
-  display: inline-block;
+  display: block;
   height: 400px;
   background-image: url("../images/group_pics/group_casual.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  transition: .5s height;
 }
 
 
 #news {
   display: inline-block;
   height: 400px;
+  transition: .5s height;
 }
 
 #spotify {
   height: 400px;
+  display: block;
 }
 
 #spotify iframe {
   z-index: 1;
-  position: relative;
-  left: 0;
-  top: -88px;
-  margin: 10px;
+  position: static;
+  /* margin: 10px; */
   width: calc(100% - 20px);
   height: calc(100% - 20px);
 }
@@ -174,32 +252,40 @@ a {
 }
 
 #links {
-  margin-top: 40px;
+  vertical-align: middle;
+  margin-top: 80px;
 }
 
 #yt {
-  width: 100%;
-  display: block;
-  margin: 0 auto;
+  position: relative;
+  height: 40px;
+  padding: none;
+  margin: none;
+  background-color: blue;
 }
 
 .social {
-  height: 60px;
-  padding: 20px;
+  display: inline-block;
+  position: relative;
+  height: none;
+  width: none;
+  padding: none;
 }
 
 .icon {
   height: 40px;
-  width:auto;
+  /*width:auto;*/
   transition: all .5s;
   vertical-align: middle;
+}
+
+.g-ytsubscribe {
+  background-color: red;
 }
 
 .icon:hover {
   height: 50px;
 }
-
-
 
 
 /* MEMBERS PAGE */
@@ -211,7 +297,6 @@ a {
 .person {
   font-size: 20px;
   display: inline-block;
-  background-color: white;
   width: 50vw;
   height: 50vw;
   transition: all 1s;
@@ -219,8 +304,8 @@ a {
 
 p {
   margin: 0;
-  font-family: "Shrikhand", cursive;
-  color: white;
+  font-family: var(--f1);
+  color: var(--ptc);
   width: inherit;
   height: inherit;
   line-height: 50vw;
@@ -250,7 +335,7 @@ p:hover {
 
 #current {
   display: block;
-  background-color: white;
+  background-color: var(--cbc);
   position: fixed;
   top: calc(50% - 250px);
   width: calc(100% - 40px);
@@ -281,7 +366,7 @@ p:hover {
 
 #currLeft {
   float: left;
-  background-color: white;
+  background-color: var(--cbc);
   height: 100%;
   width: calc(50% - 60px);
   padding: 0px 20px 0px 20px;
@@ -303,10 +388,10 @@ p:hover {
 
 h1 {
   text-align: center;
-  font-family: "Shrikhand", cursive;
+  font-family: var(--f1);
   font-weight: 50;
   font-size: 4vw;
-  color: black;
+  color: var(--cptc);
   margin-bottom: 0;
   line-height: 4vw;
 }
@@ -314,63 +399,59 @@ h1 {
 h2 {
   margin-top: 0;
   text-align: center;
-  font-family: "Concert One", cursive;
+  font-family: var(--f2);
   font-style: italic;
   font-weight: 50;
   font-size: 2vw;
   line-height: 1vw;
-  color: black;
+  color: var(--cstc);
   margin-bottom: 40px;
 
 }
 
 b {
-  font-family: "Shrikhand", cursive;
+  font-family: var(--f1);
   font-size: 2.5vw;
   font-weight: 100;
-  color: black;
+  color: var(--cptc);
 }
 
 span {
-  font-family: "Concert One", cursive;
+  font-family: var(--f2);
   font-size: 2vw;
   line-height: 3vw;
   font-weight: 100;
-  color: black;
+  color: var(--cptc);
 }
 
 /* ABOUT US */
 
 #aboutContent {
-  padding: 20px;
-  margin-top:100px;
-  background-color: blue;
-}
 
-#headerLinks {
   display: block;
-  top: 20px;
-  width: 100%;
+  text-align: center;
 }
 
-.headerLink {
-  display: inline-block;
-  width: 100px;
-  color: white;
-  top: 45px;
-  font-size: 20px;
-  font-family: "Concert One", cursive;
-  position: relative;
-  padding: 5%;
-  z-index: 24;
+h4 {
+  display: block;
+  width: 100%;
+  font-family: var(--f1);
+  font-weight: 100;
+  line-height: 0;
+  color: var(--stc);
+  font-size: 15vw;
 }
 
 h3 {
-  text-align: center;
-  font-size: 50px;
+  margin-top: 0;
+  font-size: 20px;
   font-weight: 50;
-  color: white;
-  font-family: "Concert One", cursive;
+  color: var(--ptc);
+  font-family: var(--f2);
+}
+
+#aboutTitle {
+  height: 400px;
 }
 
 
@@ -378,7 +459,7 @@ h3 {
 
 @media only screen and (max-width: 950px) {
 	.sectionText {
-    top: 150px;
+    /* top: 150px; */
     font-size: 60px;
   }
 
@@ -390,6 +471,9 @@ h3 {
     font-size: 3vw;
     line-height: 5vw;
   }
+  #yt {
+    padding: 1vw;
+  }
   .social {
     padding: 1vw;
   }
@@ -398,7 +482,7 @@ h3 {
 
 @media only screen and (max-width: 730px) {
 	.sectionText {
-    top: 160px;
+    /* top: 160px; */
     font-size: 40px;
   }
   .half:hover {
@@ -431,7 +515,7 @@ h3 {
 
 @media only screen and (max-width: 480px) {
 	.sectionText {
-    top: 180px;
+    /* top: 180px; */
     font-size: 20px;
   }
 

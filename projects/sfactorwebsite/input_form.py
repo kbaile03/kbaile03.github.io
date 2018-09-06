@@ -7,15 +7,6 @@ GROUP_DONE = False
 ONE_DONE = False
 DATA = []
 
-# FNAME = ""
-# LNAME = ""
-# PHOTO = ""
-# QUOTE = ""
-# SONG = ""
-# PART = ""
-# YEAR = ""
-# MAJOR =
-
 while not GROUP_DONE:
     GROUP_DONE_I = raw_input("Is group done? (y/n): ")
     if GROUP_DONE_I == "y":
@@ -132,7 +123,7 @@ while not GROUP_DONE:
         if ISCORRECT == "n":
             ONE_DONE = False
             print "\nTry Again"
-            
+
         JSON = {
             'fname': FNAME,
             'lname': LNAME,

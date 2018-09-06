@@ -5,87 +5,81 @@
       <link href="https://fonts.googleapis.com/css?family=Concert+One|Courgette|Fredoka+One|Shrikhand" rel="stylesheet">
       <meta charset="utf-8" />
       <link type="text/css" rel="stylesheet" href="styles/style.css" />
+      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <title>S-Factor</title>
   </head>
   <body>
-
-    <!-- facebook api -->
-
-    <div id="fb-root"></div>
-    <script>(function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.1';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));</script>
-
-
-
     <div id="header" class="pageEl card">
       <div id="circle" class="card">
         <img id="icon" src="images/Logo/sfactor_W.png" alt="s-factor logo"/>
       </div>
     </div>
+
     <div id="sections">
-      <a id="aboutUs" href ="aboutUs.html" class="card whole">
-        <div class="sectionText">
-          About Us
+      <div class="card whole">
+        <div id="aboutUs" class="header">
+          <div class="sectionText">About Us</div>
         </div>
-      </a>
-      <div id="news" class="card whole">
-        <div class="sectionText">
-          News
+        <div class="content">
         </div>
       </div>
-      <div id="gigs" class="card whole">
-        <div class="sectionText">
-          Gigs
-        </div>
-      </div>
-      <div id ="spotify" class ="card whole">
-        <div class="sectionText">
-          Our Favorite Music!
-        </div>
-        <iframe src="https://open.spotify.com/embed/user/kennedy.bailey97/playlist/7JoWF47BgQwn3YO2Qhxffb" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-      </div>
-      <div id = "two">
-        <div id="contactUs" class="card half">
+        <iframe id ="spotify" class ="card whole" src="https://open.spotify.com/embed/user/kennedy.bailey97/playlist/7JoWF47BgQwn3YO2Qhxffb" frameborder="0" allowtransparency="true" allow="encrypted-media">
           <div class="sectionText">
-            Contact Us
+            Our Favorite Music!
           </div>
-        </div><a id="members" href="members.html" class="card half">
+        </iframe>
+      <div class="card whole">
+        <a href="members.html" id="members">
           <div class="sectionText">
             Members
           </div>
         </a>
       </div>
-
-      <div id="socials">
-        <div class="sectionText">
-          Follow Us!
-        </div>
-        <div id="links">
-          <div id="yt" class="social">
-            <script src="https://apis.google.com/js/platform.js"></script>
-            <div class="g-ytsubscribe" data-channelid="UCT1wTNAwrT6W1oojPfdRKAg" data-layout="default" data-count="default"></div>
+      <div class="card whole">
+        <div id="news" class="header">
+          <div class="sectionText">
+            News
           </div>
-          <a id="fb" href="https://www.facebook.com/tufts.sfactor/" class="social">
-            <img class="icon" src="images/icons/fb_icon.png" />
-          </a>
-          <a id="ig" href="https://www.instagram.com/tufts.sfactor/" class="social">
-            <img class="icon" src="images/icons/IG_Glyph_Fill.png" />
-          </a>
-          <a id="sc" href="https://www.snapchat.com/add/Tufts.sfactor" class="social">
-            <img class="icon" src="images/icons/snap-ghost-yellow.png" />
-          </a>
+        </div>
+      </div>
+      <div class="card whole">
+        <div id="gigs" class="header">
+          <div class="sectionText">
+            Schedule
+          </div>
+        </div>
+      </div>
+      <div class="card whole">
+        <div id="contactUs" class="header">
+          <div class="sectionText">
+            Contact Us
+          </div>
+        </div>
+        <div class="content">
+          <div id="links">
+            <div id="yt" class="social">
+              <script src="https://apis.google.com/js/platform.js"></script>
+              <div class="icon g-ytsubscribe" data-channelid="UCT1wTNAwrT6W1oojPfdRKAg" data-layout="default" data-count="default"></div>
+            </div>
+            <a id="fb" href="https://www.facebook.com/tufts.sfactor/" class="social">
+              <img class="icon" src="images/icons/fb_icon.png" />
+            </a>
+            <a id="ig" href="https://www.instagram.com/tufts.sfactor/" class="social">
+              <img class="icon" src="images/icons/IG_Glyph_Fill.png" />
+            </a>
+            <a id="sc" href="https://www.snapchat.com/add/Tufts.sfactor" class="social">
+              <img class="icon" src="images/icons/snap-ghost-yellow.png" />
+            </a>
+          </div>
         </div>
       </div>
 
     </div>
-
-
     <div id="footer" class="pageEl card"></div>
+
+    <script language="javascript" src="js/members.js"></script>
+    <script src="js/sectionExpand.js" language="javascript" type="text/javascript"></script>
 
   </body>
 </html>
