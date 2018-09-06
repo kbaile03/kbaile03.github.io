@@ -27,6 +27,7 @@ for (i = 0; i < coll.length; i++) {
     } else {
       content.style.height = '1000px'
       content.style.color = 'black'
+      content.style.padding = '40px'
     }
   })
 }
