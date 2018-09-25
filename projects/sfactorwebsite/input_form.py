@@ -23,9 +23,9 @@ while not GROUP_DONE:
         print LNAME
         PHOTO = "images/members/" + FNAME.lower() + LNAME.lower() + ".jpg"
         print PHOTO
-        QUOTE = raw_input("Enter a quote in the form: ('Hello' - Me): ")
-        print QUOTE
-        SONG = raw_input("Enter your favorite song in the form (Title - Artist): ")
+        HOBBY = raw_input("Enter a/some hobbies in the form: Knitting, Oil Painting or Knitting : ")
+        print HOBBY
+        SONG = raw_input("Enter your favorite song in the form: Title - Artist : ")
         print SONG
 
         ONEBOARD_I = "sentinel"
@@ -41,9 +41,9 @@ while not GROUP_DONE:
             ONEBOARD = False
             TITLE = ""
 
-        PART = raw_input("Enter your voice part in the form (T1): ")
-        YEAR = raw_input("Enter your graduation year in the form (2019): ")
-        MAJOR = raw_input("Enter your Major(s) in the form (Computer Science, Music) or (Computer Science): ")
+        PART = raw_input("Enter your voice part in the form: T1 : ")
+        YEAR = raw_input("Enter your graduation year in the form: 2019 : ")
+        MAJOR = raw_input("Enter your Major(s) in the form: Computer Science, Music, English or Computer Science : ")
 
         FB_I = "sentinel"
 
@@ -52,7 +52,7 @@ while not GROUP_DONE:
             FB_I = raw_input("Do you want your Facebook linked?: ")
         if FB_I == "y":
             FB = True
-            FBL = raw_input("What is your profile ID? ex: (kennedybaile): ")
+            FBL = raw_input("What is your profile ID? ex: kennedybaile : ")
         else:
             FB = False
             FBL = ""
@@ -64,7 +64,7 @@ while not GROUP_DONE:
             IG_I = raw_input("Do you want your Instagram linked?: ")
         if IG_I == "y":
             IG = True
-            IGL = raw_input("What is your instagram handle? ex: (kennedygbailey): ")
+            IGL = raw_input("What is your instagram handle? ex: kennedygbailey : ")
         else:
             IG = False
             IGL = ""
@@ -76,7 +76,7 @@ while not GROUP_DONE:
             SC_I = raw_input("Do you want your Snapchat linked?: ")
         if SC_I == "y":
             SC = True
-            SCL = raw_input("What is your Snap username? ex: (kenkennedy97): ")
+            SCL = raw_input("What is your Snap username? ex: kenkennedy97 : ")
         else:
             SC = False
             SCL = ""
@@ -88,7 +88,7 @@ while not GROUP_DONE:
             SCLD_I = raw_input("Do you want your Soundcloud linked?: ")
         if SCLD_I == "y":
             SCLD = True
-            SCLDL = raw_input("What is your profile ID? ex: (kennedy-bailey-612002265): ")
+            SCLDL = raw_input("What is your profile ID? ex: kennedy-bailey-612002265 : ")
         else:
             SCLD = False
             SCLDL = ""
@@ -98,7 +98,7 @@ while not GROUP_DONE:
         print "\n\nYou entered: "
 
         print "Name: " + FNAME + " " + LNAME
-        print "Quote: " + QUOTE
+        print "Hobbies: " + HOBBY
         if ONEBOARD:
             print "Eboard Position: " + TITLE
         print "Part: " + PART
@@ -128,7 +128,7 @@ while not GROUP_DONE:
             'fname': FNAME,
             'lname': LNAME,
             'photo': PHOTO,
-            'quote': QUOTE,
+            'hobby': HOBBY,
             'song': SONG,
             'onEboard': ONEBOARD,
             'title': TITLE,

@@ -433,9 +433,10 @@ span {
 }
 
 .expo {
-  width: 80%;
   margin: 0 auto;
   font-size: 20px;
+  line-height: 40px;
+  word-wrap: break-word;
   font-family: var(--t1);
   color: white;
 }
@@ -451,6 +452,9 @@ h4 {
 }
 
 h3 {
+  display: block;
+  background-color: black;
+  width: 100%;
   margin-top: 0;
   font-size: 40px;
   font-weight: 50;
