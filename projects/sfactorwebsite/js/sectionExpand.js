@@ -1,13 +1,14 @@
 console.log('hello world')
 var coll = document.getElementsByClassName('content')
 
-for (i = 0; i < coll.length; i++) {
+for (var i = 0; i < coll.length; i++) {
   coll[i].parentNode.addEventListener('click', function () {
-
     if (this.style.height === '400px') {
-      this.style.height = '1200px'
+      this.style.height = '800px'
+      this.style.width = '100%'
     } else {
       this.style.height = '400px'
+      this.style.width = ''
     }
     console.log('clicked')
     var header = this.children[0]
@@ -21,11 +22,10 @@ for (i = 0; i < coll.length; i++) {
     if (content.style.height !== '0px') {
       content.style.height = '0px'
       content.classList.toggle('hideMe', true)
-      setchildren(content, false);
-
+      setchildren(content, false)
     } else {
       content.classList.toggle('hideMe', false)
-      content.style.height = '1000px'
+      content.style.height = '600px'
       content.style.color = 'black'
       content.style.padding = '40px'
     }
@@ -35,6 +35,6 @@ for (i = 0; i < coll.length; i++) {
 function setchildren (parent, bool) {
   for (var i = 0; i < parent.children.length; i++) {
     parent.children[i].classList.toggle('active', bool)
-    console.log(parent.children[i]);
+    console.log(parent.children[i])
   }
 }
