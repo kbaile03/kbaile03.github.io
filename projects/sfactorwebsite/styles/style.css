@@ -236,12 +236,12 @@ a:hover {
   display: block;
 }
 
-/* #spotify iframe {
+#spotify iframe {
   z-index: 1;
   position: static;
   width: calc(100% - 20px);
   height: calc(100% - 20px);
-} */
+}
 
 /* SOCIALS STYLING  */
 

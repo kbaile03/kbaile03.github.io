@@ -7,6 +7,20 @@
       <link type="text/css" rel="stylesheet" href="styles/style.css" />
       <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <link rel='stylesheet' href='styles/fullcalendar.css' />
+      <script src='js/moment.min.js'></script>
+      <script src='js/fullcalendar.js'></script>
+      <script>
+        $(function () {
+
+          // page is now ready, initialize the calendar...
+
+          $('#calendar').fullCalendar({
+            // put your options and callbacks here
+          })
+
+        });
+      </script>
       <title>S-Factor</title>
   </head>
   <body>
@@ -56,7 +70,7 @@ As a service-oriented group on the up & coming, S-Factor is always ready to shar
         <div class="content">
             <div class="expo">
             </div>
-            <div><iframe src="https://calendar.google.com/calendar/b/1/embed?height=600&amp;wkst=1&amp;bgcolor=%23FFFFFF&amp;src=jro3khi2g771sbed54dk2baocc%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FNew_York" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe></div>
+            <div id ='calendar'></div>
         </div>
       </div>
       <div class="card whole">
