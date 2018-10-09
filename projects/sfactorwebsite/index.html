@@ -10,14 +10,21 @@
       <link rel='stylesheet' href='styles/fullcalendar.css' />
       <script src='js/moment.min.js'></script>
       <script src='js/fullcalendar.js'></script>
+      <script src='js/gcal.js'></script>
       <script>
         $(function () {
 
           // page is now ready, initialize the calendar...
 
           $('#calendar').fullCalendar({
+            googleCalendarApiKey: 'AIzaSyBZ_SGOszgd3Ktwx341ycz_jEUJUqmEpss',
+            events: {
+              googleCalendarId: 'jro3khi2g771sbed54dk2baocc@group.calendar.google.com',
+              backgroundColor: 'yellow',
+              textColor: 'white'
+            }
             // put your options and callbacks here
-          })
+          });
 
         });
       </script>
