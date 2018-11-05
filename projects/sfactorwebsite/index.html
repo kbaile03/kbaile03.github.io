@@ -5,17 +5,17 @@
       <link href="https://fonts.googleapis.com/css?family=Concert+One|Courgette|Fredoka+One|Shrikhand|Baloo+Thambi|Bungee|Contrail+One|Kumar+One|Lilita+One|Molle:400i|Racing+Sans+One|Sail|Yeseva+One" rel="stylesheet">
       <meta charset="utf-8" />
       <link type="text/css" rel="stylesheet" href="styles/style.css" />
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <link rel='stylesheet' href='styles/fullcalendar.css' />
-      <script src='js/moment.min.js'></script>
-      <script src='js/fullcalendar.js'></script>
-      <script src='js/gcal.js'></script>
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+
+      <script src="js/utilities/jquery-3.3.1.min.js"></script>
+      <script src='js/utilities/moment.min.js'></script>
+      <script src='js/utilities/fullcalendar.js'></script>
+      <script src='js/utilities/gcal.js'></script>
+
       <script>
-        $(function () {
-
+        $(document).ready(function () {
           // page is now ready, initialize the calendar...
-
           $('#calendar').fullCalendar({
             googleCalendarApiKey: 'AIzaSyBZ_SGOszgd3Ktwx341ycz_jEUJUqmEpss',
             events: {
@@ -28,6 +28,7 @@
 
         });
       </script>
+
       <title>S-Factor</title>
   </head>
   <body>

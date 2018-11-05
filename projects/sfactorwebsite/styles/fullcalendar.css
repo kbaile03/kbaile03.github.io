@@ -125,6 +125,7 @@ body .fc {
 /* Buttons Groups
 --------------------------------------------------------------------------------------------------*/
 .fc-button-group {
+
   display: inline-block; }
 
 /*
@@ -805,6 +806,7 @@ NOTE: use percentage font sizes or else old IE chokes
   float: left; }
 
 .fc-toolbar .fc-right {
+  font-family: "Concert One", cursive;
   float: right; }
 
 .fc-toolbar .fc-center {

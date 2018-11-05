@@ -425,6 +425,16 @@ span {
   color: var(--cptc);
 }
 
+/* CALENDAR */
+
+.fc-day-number {
+  color: var(--stc);
+}
+
+.fc-button-group {
+  font-family: var(--f2);
+}
+
 /* ABOUT US */
 
 #aboutContent {
