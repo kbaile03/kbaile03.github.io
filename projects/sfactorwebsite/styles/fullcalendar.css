@@ -1134,7 +1134,8 @@ be a descendant of the grid when it is being dragged.
   /* seperate with a dash, wrapped in nbsp's */ }
 
 .fc-time-grid-event.fc-short .fc-title {
-  font-size: .85em;
+  font-size: 2vw;
+  color: black;
   /* make the title text the same size as the time */
   padding: 0;
   /* undo padding from above */ }

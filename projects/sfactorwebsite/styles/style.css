@@ -9,7 +9,7 @@
   --ptc: white;
   --stc: #ffffaa;
   --cbc: white;
-  --cptc: black;
+  --cptc: white;
   --cstc: blue;
 
   /* Primary Fonts */
@@ -259,10 +259,8 @@ a:hover {
 
 #yt {
   vertical-align: middle;
-  height: 40px;
   padding: none;
   margin: none;
-  background-color: blue;
 }
 
 .social {
@@ -277,11 +275,6 @@ a:hover {
   height: 40px;
   /*width:auto;*/
   transition: all .5s;
-  vertical-align: middle;
-}
-
-.g-ytsubscribe {
-  background-color: red;
   vertical-align: middle;
 }
 
@@ -420,7 +413,7 @@ b {
 
 span {
   font-family: var(--f2);
-  font-size: 2vw;
+  font-size: 3vw;
   line-height: 3vw;
   font-weight: 100;
   color: var(--cptc);
