@@ -258,7 +258,7 @@ a:hover {
 }
 
 #yt {
-  position: relative;
+  vertical-align: middle;
   height: 40px;
   padding: none;
   margin: none;
@@ -268,8 +268,8 @@ a:hover {
 .social {
   display: inline-block;
   position: relative;
-  height: none;
-  width: none;
+  height: 10vw;
+  width: 10vw;
   padding: none;
 }
 
@@ -282,6 +282,7 @@ a:hover {
 
 .g-ytsubscribe {
   background-color: red;
+  vertical-align: middle;
 }
 
 .icon:hover {
@@ -298,7 +299,7 @@ a:hover {
 .person {
   font-size: 20px;
   display: inline-block;
-  width: 50vw;
+  width: 50%;
   height: 50vw;
   transition: all 1s;
 }
